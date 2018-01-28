@@ -1,4 +1,4 @@
-# ICS33 Grade Viewer
+# [ICS33 Grade Viewer](https://chasec99.github.io/ICS33-Grade-Viewer/)
 This website allows students in Pattis's ICS 33 class to view their grades online
 
 ### Contributors
