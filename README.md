@@ -9,8 +9,8 @@ The *Grades* file is a zipped .xslm file.
 The ICS 33 Grade Viewer unzips this file and then converts it to a JSON object.
 
 Inside of the JSON object, it contains the property "Winter 2018".
-This property has a two dimensional array, which can be represented as [row[column]].  
-Rows 0-7 contain data representing statistics for the class.  
+This property has a two dimensional array, which can be represented as [row[column]].
+Rows 0-7 contain data representing statistics for the class.
 Starting at row 8, we have data for each hash id.
 
 Within each row list, the information is as follows:
@@ -30,7 +30,7 @@ Within each row list, the information is as follows:
 | 25    | Total Points          |
 | 26    | Percent Grade         |
 | 27    | Class Rank            |
-| 28    | Letter Grade          | 
+| 28    | Letter Grade          |
 
 
 ### Contributors
