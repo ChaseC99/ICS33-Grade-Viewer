@@ -43,7 +43,7 @@
                     var grades_sheet = workbook.Sheets[grades_sheet_name];
 
                     // Convert sheet to JSON and log it to console
-                    console.log(XLSX.utils.sheet_to_json(grades_sheet));
+                    console.log(XLSX.utils.sheet_to_json(grades_sheet, {header:1}));
                 }
 
                 // Send request
