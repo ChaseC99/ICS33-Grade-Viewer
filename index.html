@@ -29,19 +29,19 @@
                 req.responseType = "arraybuffer";
 
                 req.onload = function(e) {
-                var data = new Uint8Array(req.response);
-                var workbook = XLSX.read(data, {type:"array"});
+                    var data = new Uint8Array(req.response);
+                    var workbook = XLSX.read(data, {type:"array"});
 
-                /* DO SOMETHING WITH workbook HERE */
-                // The first sheet is the one with the grades
-                // This gets its name
-                var grades_sheet_name = workbook.SheetNames[0];
+                    /* DO SOMETHING WITH workbook HERE */
+                    // The first sheet is the one with the grades
+                    // This gets its name
+                    var grades_sheet_name = workbook.SheetNames[0];
 
-                // Get the grades
-                var grades_sheet = workbook.Sheets[grades_sheet_name];
+                    // Get the grades
+                    var grades_sheet = workbook.Sheets[grades_sheet_name];
 
-                // Convert to JSON
-                console.log(XLSX.utils.sheet_to_json(grades_sheet));
+                    // Convert to JSON
+                    console.log(XLSX.utils.sheet_to_json(grades_sheet));
                 }
 
                 req.send();
