@@ -14,6 +14,7 @@ Rows 0-7 contain data representing statistics for the class.
 Starting at row 8, we have data for each hash id.
 
 Within each row list, the information is as follows:
+
 | Index | Value                 |
 | ----- | --------------------- |
 | 0     | Hash ID               |
