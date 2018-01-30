@@ -1,0 +1,8 @@
+jvm-npm.js
+sheetjs.*
+duk*
+*.class
+*.jar
+rhino
+xlsx.*.js
+payload.js
