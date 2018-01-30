@@ -10,8 +10,8 @@ The ICS 33 Grade Viewer unzips this file and then converts it to a JSON object.
 
 Inside of the JSON object, it contains the property "Winter 2018".
 This property has a two dimensional array, which can be represented as [row[column]].
-Rows 0-7 contain data representing statistics for the class.
-Starting at row 8, we have data for each hash id.
+Rows 0-6 contain data representing statistics for the class.
+Starting at row 7, we have data for each hash id.
 
 Within each row list, the information is as follows:
 
