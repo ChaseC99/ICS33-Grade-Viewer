@@ -1,7 +1,7 @@
 # [ICS33 Grade Viewer](https://chasec99.github.io/ICS33-Grade-Viewer/)
 This website allows students in Pattis's ICS 33 class to view their grades online.  
 While the information on this site should be up-to-date, we cannot guarantee it.
-For the most accurate information, please visit the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/)
+For the most accurate information, please visit the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
 
 ### How It Works
 When the ICS33 Grade Viewer loads, it downloads the current *Grades* file from the ICS 33 website.
@@ -32,8 +32,10 @@ Within each row list, the information is as follows:
 | 27    | Class Rank            |
 | 28    | Letter Grade          |
 
+If a grade has not yet be inputed, then there is a null.  
+After the hash ids, there are a lot of empty lists, which can be ignored.
 
 ### Contributors
 [Chase Carnaroli](https://www.linkedin.com/in/chase-carnaroli-5ba365141/)  
-[Tristan Jogminas](https://www.linkedin.com/in/tristan-jogminas/)  
 [Miles Hong](https://github.com/wontonlegend)  
+[Tristan Jogminas](https://www.linkedin.com/in/tristan-jogminas/)  
