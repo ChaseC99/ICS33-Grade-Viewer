@@ -1,6 +1,7 @@
 // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
 // Sets xlsm file source as the test file in our GitHub repo
 var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
+var grades_json;
 
 /* set up async GET request */
 var req = new XMLHttpRequest();
@@ -21,8 +22,10 @@ req.onload = function(e) {
     var grades_sheet = workbook.Sheets[grades_sheet_name];
 
     // Convert sheet to JSON and log it to console
-    console.log(XLSX.utils.sheet_to_json(grades_sheet, {header:1}));
+    window.grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
+    console.log(grades_json);
 }
 
 // Send request
 req.send();
+console.log(grades_json);
