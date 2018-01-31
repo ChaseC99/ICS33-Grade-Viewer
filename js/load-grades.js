@@ -22,10 +22,9 @@ req.onload = function(e) {
     var grades_sheet = workbook.Sheets[grades_sheet_name];
 
     // Convert sheet to JSON and log it to console
-    window.grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
+    grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
     console.log(grades_json);
 }
 
 // Send request
 req.send();
-console.log(grades_json);
