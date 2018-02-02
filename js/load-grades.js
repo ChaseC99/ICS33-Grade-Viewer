@@ -39,26 +39,3 @@ function xlsm_to_json(req){
     grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
     return grades_json;
 }
-
-function load_hash_table(grades){
-    hash_index = findHashIndex(hashIDinput, grades);
-    if (hash_index == -1){
-        alert(hashIDinput + " is not a valid hash ID");
-    } else {
-        // For console debugging
-        hash_grades = grades[hash_index];
-        console.log(hash_grades);
-
-        // Create table
-        table = document.getElementById("HashIDTable");
-        hashTableRows = generate_hash_table_rows(grades, hash_index)
-        update_table(table, hashTableRows);
-    }
-}
-
-function load_all_table(grades){
-    // Create table
-    table = document.getElementById("HashIDTable");
-    rows = generate_all_rows(grades)
-    update_table(table, rows);
-}
