@@ -58,4 +58,7 @@ function loadgrades(req){
 
 function load_html_table(grades){
     hash_index = findHashIndex(hashIDinput, grades);
+    hash_grades = grades[hash_index];
+    console.log(hash_grades);
+    generate_table(grades, hash_index)
 }
