@@ -12,7 +12,7 @@ function sendrequest(func){
 
     // Tell request what to do with code once the request loads
     req.onload = function(e) {
-        grades_json = loadgrades(req);
+        grades_json = xlsm_to_json(req);
         console.log(grades_json);   // Debugging code
         func(grades_json)
     }
@@ -23,7 +23,7 @@ function sendrequest(func){
     console.log(req);   // Debugging code
 }
 
-function loadgrades(req){
+function xlsm_to_json(req){
     var data = new Uint8Array(req.response);
     var workbook = XLSX.read(data, {type:"array"});
 
