@@ -16,8 +16,20 @@
         <body>
             <form>
                 <label>Hash ID:</label>
-                <input type = "number" name = "hashID">
-                <input type = "submit" value = "Enter">
+                <input id="hashID" type = "number" name = "hashIDinput">
+                <input type = "submit" value = "Enter" onclick = "loadHashGrades">
             </form>
+            <script>
+                function loadHashGrades(){
+                    hashIDinput = document.getElementById("hashID");
+
+                }
+            </script>
+            <script>
+                response = sendrequest();
+                console.log(response);
+                grades = loadgrades(response);
+                console.log(grades);
+            </script>
         </body>
 </html>
