@@ -1,6 +1,6 @@
 var grades_json;
 
-function sendrequest(){
+function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
     var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
@@ -16,7 +16,7 @@ function sendrequest(){
     req.onload = function(e) {
         grades_json = loadgrades(req);
         console.log(grades_json);
-        load_html_table(grades_json)
+        func(grades_json)
         /*
         var data = new Uint8Array(req.response);
         var workbook = XLSX.read(data, {type:"array"});
@@ -59,19 +59,25 @@ function loadgrades(req){
     return grades_json;
 }
 
-function load_html_table(grades){
+function load_hash_table(grades){
     hash_index = findHashIndex(hashIDinput, grades);
     if (hash_index == -1){
         alert(hashIDinput + " is not a valid hash ID");
     } else {
+        // For console debugging
         hash_grades = grades[hash_index];
         console.log(hash_grades);
+
+        // Create table
         table = document.getElementById("HashIDTable");
-        // delete old table
-        while(table.hasChildNodes())
-        {
-            table.removeChild(table.firstChild);
-        }
-        generate_table(table, grades, hash_index);
+        hashTableRows = generate_hash_table_rows(grades, hash_index)
+        update_table(table, hashTableRows);
     }
+}
+
+function load_all_table(grades){
+    // Create table
+    table = document.getElementById("HashIDTable");
+    rows = generate_all_rows(grades)
+    update_table(table, rows);
 }
