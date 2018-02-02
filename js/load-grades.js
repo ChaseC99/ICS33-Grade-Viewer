@@ -1,3 +1,5 @@
+var grades_json;
+
 function sendrequest(){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
