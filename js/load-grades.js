@@ -1,8 +1,8 @@
 function sendrequest(){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
-    //var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
-    var url = "https://github.com/ChaseC99/ICS33-Grade-Viewer/blob/master/gradesTestFile.xlsm";
+    var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
+    //var url = "https://github.com/ChaseC99/ICS33-Grade-Viewer/blob/master/gradesTestFile.xlsm";
     var grades_json;
 
     /* set up async GET request */
