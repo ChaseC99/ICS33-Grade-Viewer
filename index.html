@@ -25,7 +25,11 @@
                 function loadHashGrades(){
                     hashIDinput = document.getElementById("hashID").value;
                     console.log(hashIDinput);
-                    sendrequest();
+                    if (typeof grades_json == 'undefined'){
+                        sendrequest();
+                    } else {
+                        load_html_table(grades_json);
+                    }
                 }
             </script>
             <div>
