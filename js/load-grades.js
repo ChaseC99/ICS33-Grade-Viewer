@@ -6,11 +6,15 @@ function sendrequest(){
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
-    req.open("GET", url, false);
+    req.open("GET", url, true);
 
 
-/*    // Tell request what to do with code once the request loads
+    // Tell request what to do with code once the request loads
     req.onload = function(e) {
+        grades_json = loadgrades(req);
+        console.log(grades_json);
+        load_html_table(grades_json)
+        /*
         var data = new Uint8Array(req.response);
         var workbook = XLSX.read(data, {type:"array"});
 
@@ -24,8 +28,9 @@ function sendrequest(){
         // Convert sheet to JSON and log it to console
         grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
         console.log(grades_json);
+        */
     }
-*/
+
     // Send request
     req.send();
     req.responseType = "arraybuffer";
@@ -49,4 +54,8 @@ function loadgrades(req){
     // Convert sheet to JSON and log it to console
     grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
     return grades_json;
+}
+
+function load_html_table(grades){
+    hash_index = findHashIndex(hashIDinput, grades);
 }
