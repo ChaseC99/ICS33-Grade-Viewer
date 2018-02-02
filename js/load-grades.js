@@ -61,7 +61,17 @@ function loadgrades(req){
 
 function load_html_table(grades){
     hash_index = findHashIndex(hashIDinput, grades);
-    hash_grades = grades[hash_index];
-    console.log(hash_grades);
-    generate_table(grades, hash_index)
+    if (hash_index == -1){
+        alert(hashIDinput + " is not a valid hash ID");
+    } else {
+        hash_grades = grades[hash_index];
+        console.log(hash_grades);
+        table = document.getElementById("HashIDTable");
+        // delete old table
+        while(table.hasChildNodes())
+        {
+            table.removeChild(table.firstChild);
+        }
+        generate_table(table, grades, hash_index);
+    }
 }
