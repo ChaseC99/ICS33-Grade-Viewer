@@ -26,15 +26,25 @@
                     hashIDinput = document.getElementById("hashID").value;
                     console.log(hashIDinput);
                     if (typeof grades_json == 'undefined'){
-                        sendrequest();
+                        sendrequest(load_hash_table);
                     } else {
-                        load_html_table(grades_json);
+                        load_hash_table(grades_json);
+                    }
+                }
+                function loadAllGrades(){
+                    if (typeof grades_json == 'undefined'){
+                        sendrequest(load_all_table);
+                    } else {
+                        load_all_table(grades_json);
                     }
                 }
             </script>
             <div>
                 <table id="HashIDTable" border = "2"></table>
             </div>
+            <form>
+                <input type="button" value="Show all grades", onclick = "loadAllGrades()">
+            </form>
             <footer>
                 <p class="grades_link"><a href="https://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip" target="_blank">Download the full grade report</a></p>
                 <p>This website is still under development.<br>We are working to bring more features and a much better visual presentation of the data.<br>If you would like to help, check out our GitHub!</p>
