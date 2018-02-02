@@ -5,7 +5,7 @@
 		<title>ICS 33 Grades</title>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/gradeviewer.css">
-        <script type = "text/javascript" src="js/gradeviewer.js"></script>
+        <script lang="javascript" src="js/gradeviewer.js"></script>
         <script lang="javascript" src="js/js-xlsx-0.11.18/dist/xlsx.full.min.js"></script>
         <script lang="javascript" src="js/load-grades.js"></script>
     </head>
@@ -17,19 +17,18 @@
             <form>
                 <label>Hash ID:</label>
                 <input id="hashID" type = "number" name = "hashIDinput">
-                <input type = "submit" value = "Enter" onclick = "loadHashGrades">
+                <input type = "button" value = "Enter" onclick = "loadHashGrades()">
             </form>
             <script>
+                var hashIDinput;
                 function loadHashGrades(){
-                    hashIDinput = document.getElementById("hashID");
-
+                    hashIDinput = document.getElementById("hashID").value;
+                    console.log(hashIDinput);
+                    sendrequest();
                 }
             </script>
-            <script>
-                response = sendrequest();
-                console.log(response);
-                grades = loadgrades(response);
-                console.log(grades);
-            </script>
+            <section id="HashIDTable">
+
+            </section>
         </body>
 </html>
