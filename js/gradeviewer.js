@@ -7,12 +7,15 @@ function findHashIndex(hashID, grades){
 }
 function generate_table(grades, hash_index) {
     // get the reference for the body
-    var table_div = document.getElementById("HashIDTable");
+    var tbl = document.getElementById("HashIDTable");
 
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
+    // delete old table
+    while(tbl.hasChildNodes())
+    {
+        tbl.removeChild(tbl.firstChild);
+    }
+
     var tblBody = document.createElement("tbody");
-
 
     // creates a table row for header
     var headers = document.createElement("tr");
@@ -53,8 +56,4 @@ function generate_table(grades, hash_index) {
 
     // put the <tbody> in the <table>
     tbl.appendChild(tblBody);
-    // appends <table> into <body>
-    table_div.appendChild(tbl);
-    // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
 }
