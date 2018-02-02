@@ -31,29 +31,59 @@ function generate_row(grades, rowNum){
     return row;
 }
 
-function generate_table(tbl, grades, hash_index) {
-    // create table body
+function update_table(tbl, rows){
+    // delete old table
+    while(table.hasChildNodes())
+    {
+        table.removeChild(table.firstChild);
+    }
+
+    // create new table body
     var tblBody = document.createElement("tbody");
+
+    // add all of the rows to the body
+    for (var r = 0; r < rows.length; r++){
+        tblBody.appendChild(rows[r]);
+    }
+
+    // add the body to the table
+    tbl.appendChild(tblBody);
+}
+
+function generate_hash_table_rows(grades, hash_index) {
+    // create table body
+    var tblBodyElements = [];
 
     // adds a table row for header
     var headerRow = generate_row(grades, 0);
-    tblBody.appendChild(headerRow);
+    tblBodyElements.push(headerRow);
 
     // adds a table row for hash grades
     var hashScores = generate_row(grades, hash_index);
-    tblBody.appendChild(hashScores);
+    tblBodyElements.push(hashScores);
 
     // creates break between hash grades and class statistics
-    tblBody.appendChild(document.createElement("br"));
+    tblBodyElements.push(document.createElement("br"));
 
 
     // adds class statistics to table
     for (var row = 1; row <= 6; row++){
         // adds a table row for the statistic
         var stats = generate_row(grades, row);
-        tblBody.appendChild(stats);
+        tblBodyElements.push(stats);
     }
 
-    // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
+    return tblBodyElements;
+}
+
+function generate_all_rows(grades){
+    var rows = [];
+    var rowNum = 0;
+
+    while(typeof grades[rowNum][0] != "undefined"){
+        rows.push(generate_row(grades, rowNum));
+        rowNum++;
+    }
+
+    return rows;
 }
