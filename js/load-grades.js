@@ -1,5 +1,6 @@
 var grades_json;
 
+// Sends xmlh request
 function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo

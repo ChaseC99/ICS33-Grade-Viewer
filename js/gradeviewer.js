@@ -9,6 +9,7 @@ function findHashIndex(hashID, grades){
     }
 }
 
+// Generates a table row
 function generate_row(grades, rowNum){
     var row = document.createElement("tr");
 
