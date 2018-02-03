@@ -23,6 +23,7 @@ function sendrequest(func){
     console.log(req);   // Debugging code
 }
 
+// Converts xlsm to json
 function xlsm_to_json(req){
     var data = new Uint8Array(req.response);
     var workbook = XLSX.read(data, {type:"array"});
