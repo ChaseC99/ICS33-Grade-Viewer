@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/gradeviewer.css">
         <script lang="javascript" src="js/gradeviewer.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script lang="javascript" src="js/js-xlsx-0.11.18/dist/xlsx.full.min.js"></script>
         <script lang="javascript" src="js/load-grades.js"></script>
     </head>
@@ -15,30 +16,40 @@
             <center><h1>Welcome to ICS 33 Grade Viewer</h1></center>
         </header>
         <body>
-            <form>
+            <div id='hash_input_form'>
                 <label>Hash ID:</label>
                 <input id="hashID" type = "number" name = "hashIDinput" required>
-                <input type = "button" value = "Enter" onclick = "loadHashGrades()">
-            </form>
-            <script>
-                var hashIDinput;
-                function loadHashGrades(){
-                    hashIDinput = document.getElementById("hashID").value;
-                    console.log(hashIDinput);
-                    if (typeof grades_json == 'undefined'){
-                        sendrequest(load_hash_table);
-                    } else {
-                        load_hash_table(grades_json);
+                <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
+                <script>
+                    var hashIDinput;
+                    function loadHashGrades(){
+                        hashIDinput = document.getElementById("hashID").value;
+                        console.log(hashIDinput);
+                        if (typeof grades_json == 'undefined'){
+                            sendrequest(load_hash_table);
+                        } else {
+                            load_hash_table(grades_json);
+                        }
                     }
-                }
-                function loadAllGrades(){
-                    if (typeof grades_json == 'undefined'){
-                        sendrequest(load_all_table);
-                    } else {
-                        load_all_table(grades_json);
+                    function loadAllGrades(){
+                        if (typeof grades_json == 'undefined'){
+                            sendrequest(load_all_table);
+                        } else {
+                            load_all_table(grades_json);
+                        }
                     }
-                }
-            </script>
+
+                    $("#hashID").keyup(function(event) {
+                        console.log('key pressed');
+                        if (event.keyCode === 13) {
+                            console.log('enter');
+                            $("#hashID").blur()
+                            $("#enterButton").click();
+                        }
+                    });
+
+                </script>
+            </div>
             <div>
                 <table id="HashIDTable" border = "2"></table>
             </div>
