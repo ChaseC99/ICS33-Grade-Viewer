@@ -105,6 +105,10 @@ function xlsm_to_json(req){
  The following functions generate HTML tables
  ***************************/
 
+// Represents the value withing the hashID input field
+var hashIDinput;
+
+
 // Generates a table row
 //  Given a row number and a json, it will create and return a row from the data
 //
@@ -245,4 +249,45 @@ function load_all_table(grades){
     table = document.getElementById("HashIDTable");
     rows = generate_all_rows(grades)
     update_table(table, rows);
+}
+
+
+// Load Hash Grades Clicked
+//  Trigged when enter is hit on the hash id input field
+//  Gets the hashID value, determines whether or not it needs to send a request
+//      depending on whether or not it already has grades_json, and then calls
+//      load_hash_table.
+//
+//  Post: load_hash_table is called
+function loadHashGrades(){
+    // Get hashID input
+    hashIDinput = document.getElementById("hashID").value;
+
+    // Log hash id to console
+    console.log('Hash Id: ' + hashIDinput);
+
+    // Determine whether or not it alread has grades_json
+    if (typeof grades_json == 'undefined'){
+        // If not, send request and have the request execute load_hash_table
+        sendrequest(load_hash_table);
+    } else {
+        load_hash_table(grades_json);
+    }
+}
+
+
+// Load All Grades Clicked
+//  Trigged when show all grades button is pressed
+//  Determines whether or not it needs to send a request depending on whether or
+//      not it already has grades_json, and then calls loadAllGrades
+//
+//  Post: load_all_table is called
+function loadAllGrades(){
+    // Determine whether or not it alread has grades_json
+    if (typeof grades_json == 'undefined'){
+        // If not, send request and have the request execute load_all_table
+        sendrequest(load_all_table);
+    } else {
+        load_all_table(grades_json);
+    }
 }
