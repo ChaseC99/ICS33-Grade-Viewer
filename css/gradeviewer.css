@@ -35,6 +35,10 @@ table {
     margin: auto;
 }
 
+tr:hover {
+    background-color: #abcb;
+}
+
 
 /**************************
 	FOOTER
