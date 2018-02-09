@@ -1,0 +1,7 @@
+{
+    "short_name": "ICS 33 Grades",
+    "name": "ICS 33 Grade Viewer",
+    "permissions": {
+       "systemXHR" : {},
+    }
+}

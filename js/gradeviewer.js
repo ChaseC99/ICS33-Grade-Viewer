@@ -58,7 +58,7 @@ function sendrequest(func){
     var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
 
     /* set up async GET request */
-    var req = new XMLHttpRequest();
+    var req = new XMLHttpRequest({mozSystem: true});
     req.open("GET", url, true);
 
     // Tell request what to do with code once the request loads
