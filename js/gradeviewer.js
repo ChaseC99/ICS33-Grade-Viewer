@@ -1,4 +1,16 @@
 /***************************
+    Global Variables
+
+ These global variables can be changed to adapt for slight changes in the xlsm
+ file from year to year
+ ***************************/
+// HashID Column
+// This is the column where the hash ids are stored
+var hashID_column = 0;
+
+
+
+/***************************
     Grades Functions
 
  The following functions are used to pull data from a grades json file
@@ -11,7 +23,7 @@
 function findHashIndex(hashID, grades){
     // Loop through the hash id column
     for (i = 0; i < grades.length; i++){
-        hash = grades[i][0];
+        hash = grades[i][hashID_column];
         if (hash == hashID){
             return i;
         } else if (typeof hash == 'undefined'){
@@ -30,8 +42,8 @@ function findHashIndex(hashID, grades){
  ***************************/
 
 // Represent the grades json
-// After sendrequest is run the first time, the json is stored here so that it
-//  it does not need to be run again (increases efficency)
+//  After sendrequest is run the first time, the json is stored here so that it
+//      it does not need to be run again (increases efficency)
 var grades_json;
 
 
