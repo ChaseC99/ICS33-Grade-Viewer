@@ -6,11 +6,17 @@ input[type=number]::-webkit-inner-spin-button {
   margin: 0;
 }
 
+#hash_input_form a {
+    text-align: center;
+    font-size: small;
+}
+
 #hashID {
     /*  Input Sizing    */
     display: block;
     margin: auto;
-    width: 30%;
+    margin-bottom: 10px;
+    width: 300px;
     height: 40px;
 
     /*  Text Syle   */
