@@ -9,7 +9,6 @@
         <script lang="javascript" src="js/gradeviewer.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script lang="javascript" src="js/js-xlsx-0.11.18/dist/xlsx.full.min.js"></script>
-        <script lang="javascript" src="js/load-grades.js"></script>
     </head>
     <body>
         <header>
@@ -26,7 +25,7 @@
                     function loadHashGrades(){
                         hashIDinput = document.getElementById("hashID").value;
                         console.log('Hash Id: ' + hashIDinput);
-                        
+
                         if (typeof grades_json == 'undefined'){
                             sendrequest(load_hash_table);
                         } else {
