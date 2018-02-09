@@ -55,7 +55,7 @@ var grades_json;
 function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
-    var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/gradesTestFile.xlsm";
+    var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/grades.xlsm";
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
