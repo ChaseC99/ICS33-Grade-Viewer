@@ -8,6 +8,7 @@ Ideally, when the ICS33 Grade Viewer loads, it downloads the current *Grades* fi
 The *Grades* file is a zipped .xslm file.
 The ICS 33 Grade Viewer unzips this file and then converts it to a JSON object.
 Unfortunately, we haven't been able to figure out how to do this because Cross-Origin Requests are blocked by current web standards.
+See [Issue #1](https://github.com/ChaseC99/ICS33-Grade-Viewer/issues/1) for more details.
 
 So for now, we manually upload a copy of the grades to the GitHub.
 Since our site is hosted on the same GitHub domain, we don't have to worry about Cross-Origin Requests.
