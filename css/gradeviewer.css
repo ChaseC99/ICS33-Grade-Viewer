@@ -1,4 +1,37 @@
 /**************************
+	HASH INPUT
+**************************/
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#hashID {
+    /*  Input Sizing    */
+    display: block;
+    margin: auto;
+    width: 30%;
+    height: 40px;
+
+    /*  Text Syle   */
+    font-size: large;
+    text-align: center;
+}
+
+#enterButton {
+    display: block;
+    margin: auto;
+    width: 25%;
+}
+
+
+/**************************
+	TABLE
+**************************/
+
+
+
+/**************************
 	FOOTER
 **************************/
 
