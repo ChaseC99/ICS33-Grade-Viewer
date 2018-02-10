@@ -41,6 +41,6 @@ If a grade has not yet be inputed, then there is a null.
 After the hash ids, there are a lot of empty lists, which can be ignored.
 
 ### Contributors
-[Chase Carnaroli](https://www.linkedin.com/in/chase-carnaroli-5ba365141/)  
+[Chase Carnaroli](https://www.linkedin.com/in/ChaseCarnaroli)  
 [Miles Hong](https://www.linkedin.com/in/miles-hong-a74ba3155/)  
 [Tristan Jogminas](https://www.linkedin.com/in/tristan-jogminas/)  
