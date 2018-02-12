@@ -5,7 +5,7 @@
  file from year to year
  The range for start/end points are inclusive
  ***************************/
-
+// Column Variables
 var hashID_column = 0;      // HashID Column
 
 var quiz_start = 1;         // Start column for quiz grades
@@ -34,6 +34,10 @@ var class_rank = 27;        // Class rank
 var letter_grade = 28;      // Letter grade
 var plus_minus = 29;        // +/- for letter grade
 
+
+// Row Variables
+var names = 0;              // Name of the column
+var total_points = 1;       // Total points for the column
 /***************************
     Grades Functions
 
@@ -54,6 +58,25 @@ function findHashIndex(hashID, grades){
             return -1;
         }
     }
+}
+
+
+// Get Score
+//  Gets a hash id's score for that specific column
+//
+//  Post: returns a string "{points} / {total points}"
+function getScore(hashIndex, column, grades){
+    return grades[hashIndex][column] + " / " + grades[total_points][column].toString();
+}
+
+
+// Convert Score to Percent
+//  Converts a string score into a percent by calling the eval method on the str
+//      Then multiplies it by 100 and turns it back into a string
+//
+//  Post: returns a string representing the percent of the score
+function scoreToPercent(score){
+    return (eval(score) * 100).toString() + '%';
 }
 
 
