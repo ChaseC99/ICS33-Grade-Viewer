@@ -118,10 +118,15 @@ function generate_row(grades, rowNum){
 
     for (var item = 0; item <= 28; item++) {
         itemValue = grades[rowNum][item];
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, and put the <td> at
-        // the end of the table row
-        var cell = document.createElement("td");
+        // Create <td> or <th> element (depending on whether row is the header)
+        //  and a text node, make the text node the contents of the <td>,
+        //  and put the <td>/<th> at the end of the table row
+        if (rowNum == 0){
+            var cell = document.createElement("th");
+        } else {
+            var cell = document.createElement("td");
+        }
+
         if (typeof itemValue != 'undefined'){
             var cellText = document.createTextNode(itemValue);
         } else {
