@@ -245,9 +245,8 @@ function update_table(tbl, rows){
 //  This generates the header row and the class statistics
 //
 //  Post: returns a list of rows for the table
-function generate_header_rows(grades){
+function generate_class_rows(grades){
     var rows = [];
-    rows.push(generate_header(grades));
 
     var rowNum = 1;
     while(rowNum < start_grades){
@@ -295,14 +294,20 @@ function load_hash_table(grades){
         hash_grades = grades[hash_index];
         console.log(hash_grades);
 
-        // Create class statistics table
-        rows = generate_header_rows(grades);
+        // Create rows variable
+        var rows = [];
+
+        // Add header to rows
+        rows.push(generate_header(grades));
+
+        // Create grades table
+        rows.push(generate_row(grades, hash_index));
 
         // Add break
         rows.push(document.createElement('br'));
 
-        // Create grades table
-        rows.push(generate_row(grades, hash_index));
+        // Create class statistics table
+        rows = rows.concat(generate_class_rows(grades));
 
         // Update the grades table
         table = document.getElementById("GradesTable");
@@ -317,8 +322,14 @@ function load_hash_table(grades){
 //
 // Post: table is updated to display all grades
 function load_all_table(grades){
+    // Create rows variable
+    var rows = [];
+
+    // Add header to rows
+    rows.push(generate_header(grades));
+
     // Create class statistics table
-    rows = generate_header_rows(grades);
+    rows = rows.concat(generate_class_rows(grades));
 
     // Add break
     rows.push(document.createElement('br'));
