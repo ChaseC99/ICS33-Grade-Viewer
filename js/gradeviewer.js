@@ -3,13 +3,41 @@
 
  These global variables can be changed to adapt for slight changes in the xlsm
  file from year to year
+ The range for start/end points are inclusive
  ***************************/
-// HashID Column
-// This is the column where the hash ids are stored
-var hashID_column = 0;
+// Column Variables
+var hashID_column = 0;      // HashID Column
+
+var quiz_start = 1;         // Start column for quiz grades
+var quiz_end = 8;           // End column for quiz grades
+
+var project_start = 9;      // Start column for project grades
+var project_end = 14;       // End column for project grades
+
+var inLab_start = 15;       // Start column for in lab exam grades
+var inLab_end = 16          // End column for in lab grades
+
+var midterm = 17;           // Midterm score
+var midterm_u? = 18;        // ?
+var final = 19;             // Final score
+
+var sum_quizzes = 20;       // Sum of quiz scores
+var sum_projects = 21;      // Sum of project scores
+var sum_inLab = 22;         // Sum of in lab exam scores
+var sum_exams = 23;         // Sum of exam scores (midterm and final)
+
+var extra_credit = 24;      // Number of extra credit points
+
+var total_points = 25;      // Total points
+var percent_grade = 26;     // Percent grades
+var class_rank = 27;        // Class rank
+var letter_grade = 28;      // Letter grade
+var plus_minus = 29;        // +/- for letter grade
 
 
-
+// Row Variables
+var names = 0;              // Name of the column
+var total_points = 1;       // Total points for the column
 /***************************
     Grades Functions
 
@@ -30,6 +58,25 @@ function findHashIndex(hashID, grades){
             return -1;
         }
     }
+}
+
+
+// Get Score
+//  Gets a hash id's score for that specific column
+//
+//  Post: returns a string "{points} / {total points}"
+function getScore(hashIndex, column, grades){
+    return grades[hashIndex][column] + " / " + grades[total_points][column].toString();
+}
+
+
+// Convert Score to Percent
+//  Converts a string score into a percent by calling the eval method on the str
+//      Then multiplies it by 100 and turns it back into a string
+//
+//  Post: returns a string representing the percent of the score
+function scoreToPercent(score){
+    return (eval(score) * 100).toString() + '%';
 }
 
 

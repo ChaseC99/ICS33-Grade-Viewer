@@ -36,6 +36,7 @@ Within each row list, the information is as follows:
 | 26    | Percent Grade         |
 | 27    | Class Rank            |
 | 28    | Letter Grade          |
+| 29    | +/- (for Letter Grade)|
 
 If a grade has not yet be inputed, then there is a null.  
 After the hash ids, there are a lot of empty lists, which can be ignored.
