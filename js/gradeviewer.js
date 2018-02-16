@@ -241,40 +241,10 @@ function update_table(tbl, rows){
 }
 
 
-// Generates the table to display a single hash id
-//  First row is the header, describing what each column is
-//  Second row is the grades for that hash id
-//  Then there is a break
-//  Finally the class statistics are displayed
+// Generate Header Rows
+//  This generates the header row and the class statistics
 //
-//  Post: returns the list of table body elements described above
-function generate_hash_table_rows(grades, hash_index) {
-    // create table body elements list
-    var tblBodyElements = [];
-
-    // adds a table row for header
-    var headerRow = generate_row(grades, 0);
-    tblBodyElements.push(headerRow);
-
-    // adds a table row for hash grades
-    var hashScores = generate_row(grades, hash_index);
-    tblBodyElements.push(hashScores);
-
-    // creates break between hash grades and class statistics
-    tblBodyElements.push(document.createElement("br"));
-
-
-    // adds class statistics to table
-    for (var row = 1; row <= 6; row++){
-        // adds a table row for the statistic
-        var stats = generate_row(grades, row);
-        tblBodyElements.push(stats);
-    }
-
-    return tblBodyElements;
-}
-
-
+//  Post: returns a list of rows for the table
 function generate_header_rows(grades){
     var rows = [];
     rows.push(generate_header(grades));
@@ -287,6 +257,7 @@ function generate_header_rows(grades){
 
     return rows;
 }
+
 
 // Generates the table to display all the grades
 //  Shows each row like how it is displayed in the xlsm file
@@ -324,10 +295,15 @@ function load_hash_table(grades){
         hash_grades = grades[hash_index];
         console.log(hash_grades);
 
+        // Create class statistics table
+        table = document.getElementById("HeaderTable");
+        rows = generate_header_rows(grades);
+        update_table(table, rows);
+
         // Create table
-        table = document.getElementById("HashIDTable");
-        hashTableRows = generate_hash_table_rows(grades, hash_index)
-        update_table(table, hashTableRows);
+        table = document.getElementById("GradesTable");
+        hashTableRow = [generate_row(grades, hash_index)];
+        update_table(table, hashTableRow);
     }
 }
 
