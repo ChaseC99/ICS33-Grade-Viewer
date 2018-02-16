@@ -36,8 +36,9 @@ var plus_minus = 29;        // +/- for letter grade
 
 
 // Row Variables
-var names = 0;              // Name of the column
+var header = 0;              // Name of the column
 var total_points = 1;       // Total points for the column
+var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 /***************************
     Grades Functions
@@ -164,7 +165,7 @@ var hashIDinput;
 function generate_row(grades, rowNum){
     var row = document.createElement("tr");
 
-    for (var item = 1; item <= table_length; item++) {
+    for (var item = 0; item <= table_length; item++) {
         itemValue = grades[rowNum][item];
         // Create <td> element (depending on whether row is the header)
         //  and a text node, make the text node the contents of the <td>,
@@ -185,17 +186,23 @@ function generate_row(grades, rowNum){
 }
 
 
+// Generates the header row
+//  Creates a row header based on what number the header var is
+//
+//  Post: returns a row element
 function generate_header(grades){
     var row = document.createElement('tr');
 
     for (var item = 0; item <= table_length; item++) {
-        itemValue = grades[rowNum][item];
+        itemValue = grades[header][item];
         // Create <th> element (depending on whether row is the header)
         //  and a text node, make the text node the contents of the <th>,
         //  and put the <th> at the end of the table row
         var cell = document.createElement("th");
 
-        if (typeof itemValue != 'undefined'){
+        if (item == plus_minus){
+            var cellText = document.createTextNode("+/-")
+        } else if (typeof itemValue != 'undefined'){
             var cellText = document.createTextNode(itemValue);
         } else {
             var cellText = document.createTextNode("");
@@ -206,7 +213,6 @@ function generate_header(grades){
     }
 
     return row;
-}
 }
 
 
@@ -269,14 +275,27 @@ function generate_hash_table_rows(grades, hash_index) {
 }
 
 
+function generate_header_rows(grades){
+    var rows = [];
+    rows.push(generate_header(grades));
+
+    var rowNum = 1;
+    while(rowNum < start_grades){
+        rows.push(generate_row(grades, rowNum));
+        rowNum++;
+    }
+
+    return rows;
+}
+
 // Generates the table to display all the grades
 //  Shows each row like how it is displayed in the xlsm file
 //
 //  Post: returns a list of rows for the table
-function generate_all_rows(grades){
+function generate_grade_rows(grades){
     var rows = [];
-    var rowNum = 0;
 
+    var rowNum = start_grades;
     while(typeof grades[rowNum][0] != "undefined"){
         rows.push(generate_row(grades, rowNum));
         rowNum++;
@@ -319,9 +338,14 @@ function load_hash_table(grades){
 //
 // Post: table is updated to display all grades
 function load_all_table(grades){
-    // Create table
-    table = document.getElementById("HashIDTable");
-    rows = generate_all_rows(grades)
+    // Create class statistics table
+    table = document.getElementById("HeaderTable");
+    rows = generate_header_rows(grades);
+    update_table(table, rows);
+
+    // Create grades table
+    table = document.getElementById("GradesTable");
+    rows = generate_grade_rows(grades)
     update_table(table, rows);
 }
 
