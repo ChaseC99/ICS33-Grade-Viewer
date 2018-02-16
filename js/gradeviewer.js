@@ -296,14 +296,17 @@ function load_hash_table(grades){
         console.log(hash_grades);
 
         // Create class statistics table
-        table = document.getElementById("HeaderTable");
         rows = generate_header_rows(grades);
-        update_table(table, rows);
 
-        // Create table
+        // Add break
+        rows.push(document.createElement('br'));
+
+        // Create grades table
+        rows.push(generate_row(grades, hash_index));
+
+        // Update the grades table
         table = document.getElementById("GradesTable");
-        hashTableRow = [generate_row(grades, hash_index)];
-        update_table(table, hashTableRow);
+        update_table(table, rows);
     }
 }
 
@@ -315,13 +318,16 @@ function load_hash_table(grades){
 // Post: table is updated to display all grades
 function load_all_table(grades){
     // Create class statistics table
-    table = document.getElementById("HeaderTable");
     rows = generate_header_rows(grades);
-    update_table(table, rows);
+
+    // Add break
+    rows.push(document.createElement('br'));
 
     // Create grades table
+    rows = rows.concat(generate_grade_rows(grades));
+
+    // Update the grades table
     table = document.getElementById("GradesTable");
-    rows = generate_grade_rows(grades)
     update_table(table, rows);
 }
 
