@@ -18,7 +18,7 @@ var inLab_start = 15;       // Start column for in lab exam grades
 var inLab_end = 16          // End column for in lab grades
 
 var midterm = 17;           // Midterm score
-var midterm_u? = 18;        // ?
+var midterm_u = 18;         // ?
 var final = 19;             // Final score
 
 var sum_quizzes = 20;       // Sum of quiz scores
@@ -38,6 +38,7 @@ var plus_minus = 29;        // +/- for letter grade
 // Row Variables
 var names = 0;              // Name of the column
 var total_points = 1;       // Total points for the column
+var table_length = 29;      // Length of the table
 /***************************
     Grades Functions
 
@@ -163,16 +164,12 @@ var hashIDinput;
 function generate_row(grades, rowNum){
     var row = document.createElement("tr");
 
-    for (var item = 0; item <= 28; item++) {
+    for (var item = 1; item <= table_length; item++) {
         itemValue = grades[rowNum][item];
-        // Create <td> or <th> element (depending on whether row is the header)
+        // Create <td> element (depending on whether row is the header)
         //  and a text node, make the text node the contents of the <td>,
-        //  and put the <td>/<th> at the end of the table row
-        if (rowNum == 0){
-            var cell = document.createElement("th");
-        } else {
-            var cell = document.createElement("td");
-        }
+        //  and put the <td> at the end of the table row
+        var cell = document.createElement("td");
 
         if (typeof itemValue != 'undefined'){
             var cellText = document.createTextNode(itemValue);
@@ -185,6 +182,31 @@ function generate_row(grades, rowNum){
     }
 
     return row;
+}
+
+
+function generate_header(grades){
+    var row = document.createElement('tr');
+
+    for (var item = 0; item <= table_length; item++) {
+        itemValue = grades[rowNum][item];
+        // Create <th> element (depending on whether row is the header)
+        //  and a text node, make the text node the contents of the <th>,
+        //  and put the <th> at the end of the table row
+        var cell = document.createElement("th");
+
+        if (typeof itemValue != 'undefined'){
+            var cellText = document.createTextNode(itemValue);
+        } else {
+            var cellText = document.createTextNode("");
+        }
+
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+    }
+
+    return row;
+}
 }
 
 
