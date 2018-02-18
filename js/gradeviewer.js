@@ -356,7 +356,7 @@ function loadHashGrades(){
     date = new Date();
     date.setTime(date.getTime() + 6048000000);
     document.cookie = hashIDinput + "; expires=" + date;
-    console.log(document.cookie)
+    console.log(decodeURIComponent(document.cookie))
     // Log hash id to console
     console.log('Hash Id: ' + hashIDinput);
 

@@ -12,8 +12,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script lang="javascript" src="js/js-xlsx-0.11.18/dist/xlsx.full.min.js"></script>
         <script>
-            if (document.cookie != "") {
-                $('#hashID').attr("value", document.cookie);
+            if (decodeURIComponent(document.cookie) != "") {
+                $('#hashID').attr("value", decodeURIComponent(document.cookie));
                 $("#enterButton").click();
             };
         </script>
