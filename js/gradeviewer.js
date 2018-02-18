@@ -353,7 +353,9 @@ function load_all_table(grades){
 function loadHashGrades(){
     // Get hashID input
     hashIDinput = document.getElementById("hashID").value;
-
+    date = new Date();
+    date.setTime(date.getTime() + 6048000000)
+    document.cookie = document.getElementById("hashID").value + "; expires" + date;
     // Log hash id to console
     console.log('Hash Id: ' + hashIDinput);
 
