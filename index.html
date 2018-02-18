@@ -22,7 +22,6 @@
                 <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
                 <a href="https://support.ics.uci.edu/studentID/" target="_blank"><p>Forgot your Hash ID?</p></a>
                 <script>
-                    console.log(decodeURIComponent(document.cookie))
                     if (decodeURIComponent(document.cookie) != "") {
                         $('#hashID').attr("value", decodeURIComponent(document.cookie));
                         $("#enterButton").click();
