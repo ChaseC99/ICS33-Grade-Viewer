@@ -11,13 +11,6 @@
         <script lang="javascript" src="js/gradeviewer.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script lang="javascript" src="js/js-xlsx-0.11.18/dist/xlsx.full.min.js"></script>
-        <script>
-            console.log(decodeURIComponent(document.cookie))
-            if (decodeURIComponent(document.cookie) != "") {
-                $('#hashID').attr("value", decodeURIComponent(document.cookie));
-                $("#enterButton").click();
-            };
-        </script>
     </head>
     <body>
         <header>
@@ -28,6 +21,13 @@
                 <input id="hashID" type = "tel" name = "hashIDinput" placeholder="Hash Id" required>
                 <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
                 <a href="https://support.ics.uci.edu/studentID/" target="_blank"><p>Forgot your Hash ID?</p></a>
+                <script>
+                    console.log(decodeURIComponent(document.cookie))
+                    if (decodeURIComponent(document.cookie) != "") {
+                        $('#hashID').attr("value", decodeURIComponent(document.cookie));
+                        $("#enterButton").click();
+                    };
+                </script>
                 <script>
                     // Link enter button in hashID input, with enterButton
                     $("#hashID").keyup(function(event) {
