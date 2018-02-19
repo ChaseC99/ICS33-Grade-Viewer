@@ -147,6 +147,15 @@ function xlsm_to_json(req){
 }
 
 
+// Cookie Code
+//  If there is a cookie, which should store the last entered hash id,
+//      then that id is set as the default value for the hashID input
+if (decodeURIComponent(document.cookie) != "") {
+    $('#hashID').attr("value", decodeURIComponent(document.cookie));
+    //$("#enterButton").click();
+};
+
+
 
 /***************************
     HTML Table Functions
