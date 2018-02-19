@@ -147,13 +147,33 @@ function xlsm_to_json(req){
 }
 
 
+
+/***************************
+    Cookie Code
+
+ This code is for the cookies for the website
+ It stores the hash id value as a cookie
+ When the site loads, if there is a cookie,
+ which should store the last entered hash id,
+ then that id is set as the default value for the hashID input
+ ***************************/
+
 // Cookie Code
 //  If there is a cookie, which should store the last entered hash id,
 //      then that id is set as the default value for the hashID input
 if (decodeURIComponent(document.cookie) != "") {
     $('#hashID').attr("value", decodeURIComponent(document.cookie));
-    //$("#enterButton").click();
+    $("#enterButton").click();
 };
+
+
+// Save Cookie
+//  This function saves a number as a cookie
+function save_cookie(number){
+    date = new Date();
+    date.setTime(date.getTime() + 6048000000);
+    document.cookie = number + "; expires=" + date;
+}
 
 
 
@@ -362,9 +382,10 @@ function load_all_table(grades){
 function loadHashGrades(){
     // Get hashID input
     hashIDinput = document.getElementById("hashID").value;
-    date = new Date();
-    date.setTime(date.getTime() + 6048000000);
-    document.cookie = hashIDinput + "; expires=" + date;
+
+    // Save hashID input as a cookie
+    save_cookie(hashIDinput)
+
     // Log hash id to console
     console.log('Hash Id: ' + hashIDinput);
 
