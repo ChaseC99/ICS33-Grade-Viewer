@@ -30,6 +30,11 @@
                             $("#enterButton").click();  // Clicks enter button
                         }
                     });
+
+                    if (decodeURIComponent(document.cookie) != "") {
+                        $('#hashID').attr("value", decodeURIComponent(document.cookie));
+                        $("#enterButton").click();
+                    };
                 </script>
             </div>
             <div>
