@@ -21,21 +21,6 @@
                 <input id="hashID" type = "tel" name = "hashIDinput" placeholder="Hash Id" required>
                 <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
                 <a href="https://support.ics.uci.edu/studentID/" target="_blank"><p>Forgot your Hash ID?</p></a>
-                <script>
-                    // Link enter button in hashID input, with enterButton
-                    $("#hashID").keyup(function(event) {
-                        // Check to see if enter button (code 13) was pressed
-                        if (event.keyCode === 13) {
-                            $("#hashID").blur()         // Defocuses hashID input
-                            $("#enterButton").click();  // Clicks enter button
-                        }
-                    });
-
-                    if (decodeURIComponent(document.cookie) != "") {
-                        $('#hashID').attr("value", decodeURIComponent(document.cookie));
-                        //$("#enterButton").click();
-                    };
-                </script>
             </div>
             <div>
                 <table id="GradesTable" border="2"></table>
@@ -47,4 +32,19 @@
 				<p><a href="https://github.com/ChaseC99/ICS33-Grade-Viewer" target="_blank"><img src="img/githubicon.png" alt="GitHub Logo" class="social-icon">Source Code</a></p>
 			</footer>
         </body>
+    </body>
+    <script>
+        // Link enter button in hashID input, with enterButton
+        $("#hashID").keyup(function(event) {
+            // Check to see if enter button (code 13) was pressed
+            if (event.keyCode === 13) {
+                $("#hashID").blur()         // Defocuses hashID input
+                $("#enterButton").click();  // Clicks enter button
+            }
+        });
+
+        if (decodeURIComponent(document.cookie) != "") {
+            $('#hashID').attr("value", decodeURIComponent(document.cookie));
+        };
+    </script>
 </html>
