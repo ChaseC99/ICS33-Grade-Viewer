@@ -43,6 +43,8 @@
             }
         });
 
+        // Checks for hash id cookie
+        // If there is one, replace hashID value with hash id from cookie
         if (getHashCookie() != "") {
             $('#hashID').attr("value", getHashCookie());
         };

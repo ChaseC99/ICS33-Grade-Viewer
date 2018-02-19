@@ -37,10 +37,10 @@ var plus_minus = 29;        // +/- for letter grade
 
 
 // Row Variables
-var header = 0;              // Name of the column
-var total_points = 1;       // Total points for the column
-var normalization = 7;
-var students = 2;
+var header = 0;             // Name of the column
+var total_points = 1;       // Row: Points for Instrument
+var students = 2;           // Row: Students Taking
+var normalization = 7;      // Row: Normalization
 var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 
@@ -118,11 +118,17 @@ function sendrequest(func){
 
     // Tell request what to do with code once the request loads
     req.onload = function(e) {
+        // Convert response to json
         grades_json = xlsm_to_json(req);
+
+        // Change row names for class statistics
         grades_json[total_points][0] = 'Total Points';
         grades_json[normalization][0] = 'Normalization'
         grades_json[students][0] = 'Students'
+
         console.log(grades_json);   // Debugging code
+
+        // Execute funciton with grades_json
         func(grades_json)
     }
 
@@ -167,17 +173,10 @@ function xlsm_to_json(req){
  then that id is set as the default value for the hashID input
  ***************************/
 
-// Cookie Code
-//  If there is a cookie, which should store the last entered hash id,
-//      then that id is set as the default value for the hashID input
-function load_cookie(){
-    if (decodeURIComponent(document.cookie) != "") {
-        $('#hashID').attr("value", decodeURIComponent(document.cookie));
-        $("#enterButton").click();
-    };
-}
-
-
+// Get Hash ID Cookie
+//  Decodes and parses the cookie, looking for the hashid value
+//
+//  Post: returns the hash id string if present, else returns ""
 function getHashCookie() {
     var name = "hashid=";
     var decodedCookie = decodeURIComponent(document.cookie);
