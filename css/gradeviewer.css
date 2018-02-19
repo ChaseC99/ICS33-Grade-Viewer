@@ -32,6 +32,7 @@
 **************************/
 
 table {
+    width: 85%;
     font-family: 'Arial';
     margin: auto;
     border-collapse: collapse;
@@ -64,7 +65,6 @@ table th {
     background: #0085ff;
     color: #fff;
     padding: 0.5em 0.4em;
-
     font-size: 1em;
 }
 
