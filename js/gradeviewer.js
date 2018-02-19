@@ -251,6 +251,7 @@ function generate_header(grades){
 
     for (var item = 0; item <= table_length; item++) {
         itemValue = grades[header][item];
+
         // Create <th> element (depending on whether row is the header)
         //  and a text node, make the text node the contents of the <th>,
         //  and put the <th> at the end of the table row
@@ -259,6 +260,7 @@ function generate_header(grades){
         if (item == plus_minus){
             var cellText = document.createTextNode("+/-")
         } else if (typeof itemValue != 'undefined'){
+            itemValue = itemValue.replace('å', 'Σ');
             var cellText = document.createTextNode(itemValue);
         } else {
             var cellText = document.createTextNode("");
