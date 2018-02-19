@@ -38,6 +38,7 @@ var plus_minus = 29;        // +/- for letter grade
 // Row Variables
 var header = 0;              // Name of the column
 var total_points = 1;       // Total points for the column
+var normalization = 7;
 var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 /***************************
@@ -113,6 +114,8 @@ function sendrequest(func){
     // Tell request what to do with code once the request loads
     req.onload = function(e) {
         grades_json = xlsm_to_json(req);
+        grades_json[total_points][0] = 'Total Points';
+        grades_json[normalization][0] = 'Normalization'
         console.log(grades_json);   // Debugging code
         func(grades_json)
     }
@@ -181,7 +184,7 @@ function save_cookie(number){
 
 /***************************
  HTML Table Functions
- 
+
  The following functions generate HTML tables
  ***************************/
 
