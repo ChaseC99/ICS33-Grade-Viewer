@@ -39,6 +39,7 @@ var plus_minus = 29;        // +/- for letter grade
 var header = 0;              // Name of the column
 var total_points = 1;       // Total points for the column
 var normalization = 7;
+var students = 2;
 var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 /***************************
@@ -116,6 +117,7 @@ function sendrequest(func){
         grades_json = xlsm_to_json(req);
         grades_json[total_points][0] = 'Total Points';
         grades_json[normalization][0] = 'Normalization'
+        grades_json[students][0] = 'Students'
         console.log(grades_json);   // Debugging code
         func(grades_json)
     }
