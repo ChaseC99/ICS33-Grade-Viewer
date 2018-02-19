@@ -1,6 +1,5 @@
 /***************************
-    Global Variables
-
+ Global Variables
  These global variables can be changed to adapt for slight changes in the xlsm
  file from year to year
  The range for start/end points are inclusive
@@ -41,8 +40,7 @@ var total_points = 1;       // Total points for the column
 var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 /***************************
-    Grades Functions
-
+ Grades Functions
  The following functions are used to pull data from a grades json file
  ***************************/
 
@@ -84,8 +82,7 @@ function scoreToPercent(score){
 
 
 /***************************
-    Download and Convert XLSM file to JSON
-
+ Download and Convert XLSM file to JSON
  The following functions are used to download and convert the xlsm
  file into json format.
  ***************************/
@@ -149,8 +146,37 @@ function xlsm_to_json(req){
 
 
 /***************************
-    HTML Table Functions
+ Cookie Code
+ This code is for the cookies for the website
+ It stores the hash id value as a cookie
+ When the site loads, if there is a cookie,
+ which should store the last entered hash id,
+ then that id is set as the default value for the hashID input
+ ***************************/
 
+// Cookie Code
+//  If there is a cookie, which should store the last entered hash id,
+//      then that id is set as the default value for the hashID input
+function load_cookie(){
+    if (decodeURIComponent(document.cookie) != "") {
+        $('#hashID').attr("value", decodeURIComponent(document.cookie));
+        $("#enterButton").click();
+    };
+}
+
+
+// Save Cookie
+//  This function saves a number as a cookie
+function save_cookie(number){
+    date = new Date();
+    date.setTime(date.getTime() + 6048000000);
+    document.cookie = number + "; expires=" + date;
+}
+
+
+
+/***************************
+ HTML Table Functions
  The following functions generate HTML tables
  ***************************/
 
@@ -245,9 +271,8 @@ function update_table(tbl, rows){
 //  This generates the header row and the class statistics
 //
 //  Post: returns a list of rows for the table
-function generate_header_rows(grades){
+function generate_class_rows(grades){
     var rows = [];
-    rows.push(generate_header(grades));
 
     var rowNum = 1;
     while(rowNum < start_grades){
@@ -295,15 +320,24 @@ function load_hash_table(grades){
         hash_grades = grades[hash_index];
         console.log(hash_grades);
 
-        // Create class statistics table
-        table = document.getElementById("HeaderTable");
-        rows = generate_header_rows(grades);
-        update_table(table, rows);
+        // Create rows variable
+        var rows = [];
 
-        // Create table
+        // Add header to rows
+        rows.push(generate_header(grades));
+
+        // Create grades table
+        rows.push(generate_row(grades, hash_index));
+
+        // Add break
+        rows.push(document.createElement('br'));
+
+        // Create class statistics table
+        rows = rows.concat(generate_class_rows(grades));
+
+        // Update the grades table
         table = document.getElementById("GradesTable");
-        hashTableRow = [generate_row(grades, hash_index)];
-        update_table(table, hashTableRow);
+        update_table(table, rows);
     }
 }
 
@@ -314,14 +348,23 @@ function load_hash_table(grades){
 //
 // Post: table is updated to display all grades
 function load_all_table(grades){
+    // Create rows variable
+    var rows = [];
+
+    // Add header to rows
+    rows.push(generate_header(grades));
+
     // Create class statistics table
-    table = document.getElementById("HeaderTable");
-    rows = generate_header_rows(grades);
-    update_table(table, rows);
+    rows = rows.concat(generate_class_rows(grades));
+
+    // Add break
+    rows.push(document.createElement('br'));
 
     // Create grades table
+    rows = rows.concat(generate_grade_rows(grades));
+
+    // Update the grades table
     table = document.getElementById("GradesTable");
-    rows = generate_grade_rows(grades)
     update_table(table, rows);
 }
 
@@ -336,6 +379,9 @@ function load_all_table(grades){
 function loadHashGrades(){
     // Get hashID input
     hashIDinput = document.getElementById("hashID").value;
+
+    // Save hashID input as a cookie
+    save_cookie(hashIDinput)
 
     // Log hash id to console
     console.log('Hash Id: ' + hashIDinput);

@@ -32,8 +32,8 @@
 **************************/
 
 table {
-    margin: auto;
     font-family: 'Arial';
+    margin: auto;
     border-collapse: collapse;
     border: 1px solid #eee;
     border-bottom: 2px solid #0085ff;
