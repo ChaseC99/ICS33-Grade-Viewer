@@ -5,6 +5,7 @@
  file from year to year
  The range for start/end points are inclusive
  ***************************/
+
 // Column Variables
 var hashID_column = 0;      // HashID Column
 
@@ -42,6 +43,9 @@ var normalization = 7;
 var students = 2;
 var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
+
+
+
 /***************************
  Grades Functions
 
@@ -174,12 +178,29 @@ function load_cookie(){
 }
 
 
+function getHashCookie() {
+    var name = "hashid=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
 // Save Cookie
 //  This function saves a number as a cookie
 function save_cookie(number){
     date = new Date();
     date.setTime(date.getTime() + 6048000000);
-    document.cookie = number + "; expires=" + date;
+    document.cookie = "hashid=" + number + "; expires=" + date;
 }
 
 

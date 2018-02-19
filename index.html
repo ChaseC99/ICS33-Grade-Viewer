@@ -43,8 +43,8 @@
             }
         });
 
-        if (decodeURIComponent(document.cookie) != "") {
-            $('#hashID').attr("value", decodeURIComponent(document.cookie));
+        if (getHashCookie() != "") {
+            $('#hashID').attr("value", getHashCookie());
         };
     </script>
 </html>
