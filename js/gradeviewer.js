@@ -1,5 +1,6 @@
 /***************************
  Global Variables
+
  These global variables can be changed to adapt for slight changes in the xlsm
  file from year to year
  The range for start/end points are inclusive
@@ -41,6 +42,7 @@ var start_grades = 8;       // Row number for start of grades
 var table_length = 29;      // Length of the table
 /***************************
  Grades Functions
+
  The following functions are used to pull data from a grades json file
  ***************************/
 
@@ -83,6 +85,7 @@ function scoreToPercent(score){
 
 /***************************
  Download and Convert XLSM file to JSON
+
  The following functions are used to download and convert the xlsm
  file into json format.
  ***************************/
@@ -147,6 +150,7 @@ function xlsm_to_json(req){
 
 /***************************
  Cookie Code
+
  This code is for the cookies for the website
  It stores the hash id value as a cookie
  When the site loads, if there is a cookie,
@@ -177,6 +181,7 @@ function save_cookie(number){
 
 /***************************
  HTML Table Functions
+ 
  The following functions generate HTML tables
  ***************************/
 
