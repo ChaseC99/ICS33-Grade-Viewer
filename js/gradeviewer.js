@@ -301,7 +301,6 @@ function load_hash_table(grades){
         update_table(table, rows);
 
         // Create table
-
         table = document.getElementById("GradesTable");
         hashTableRow = [generate_row(grades, hash_index)];
         update_table(table, hashTableRow);
@@ -322,7 +321,7 @@ function load_all_table(grades){
 
     // Create grades table
     table = document.getElementById("GradesTable");
-    rows = generate_grade_rows(grades);
+    rows = generate_grade_rows(grades)
     update_table(table, rows);
 }
 

@@ -30,11 +30,14 @@
                             $("#enterButton").click();  // Clicks enter button
                         }
                     });
+
+                    if (decodeURIComponent(document.cookie) != "") {
+                        $('#hashID').attr("value", decodeURIComponent(document.cookie));
+                        //$("#enterButton").click();
+                    };
                 </script>
             </div>
             <div>
-                <table id="HeaderTable" border="2"></table>
-                <br>
                 <table id="GradesTable" border="2"></table>
             </div>
             <footer>
