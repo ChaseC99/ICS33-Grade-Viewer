@@ -110,7 +110,7 @@ var grades_json;
 function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
-    var url = "https://raw.githubusercontent.com/ChaseC99/ICS33-Grade-Viewer/master/grades.xlsm";
+    var url = "http://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
@@ -138,26 +138,17 @@ function sendrequest(func){
     console.log(req);   // Debugging code
 }
 
-function getLocalZip(func){
-    JSZipUtils.getBinaryContent('test.zip', function(err, data) {
-    if(err) {
-        throw err; // or handle err
-    }
-
-    JSZip.loadAsync(data).then(function () {
-        console.log('loaded');
-    });
-});
-}
-
 
 // Converts xlsm to json
 //  Uses SheetJS code to do this
 //
 //  Post: returns json of the request
 function xlsm_to_json(req){
+    var new_zip = new JSZip();
+    new_zip.load(req.response);
+
     // Set up and read data from file
-    var data = new Uint8Array(req.response);
+    var data = new Uint8Array(new_zip["files"]["ics33win18grades.xlsm"]["_data"]["getContent"]());
     var workbook = XLSX.read(data, {type:"array"});
 
     /* DO SOMETHING WITH workbook HERE */
@@ -450,7 +441,7 @@ function loadAllGrades(){
     // Determine whether or not it alread has grades_json
     if (typeof grades_json == 'undefined'){
         // If not, send request and have the request execute load_all_table
-        getLocalZip(load_all_table);
+        sendrequest(load_all_table);
     } else {
         load_all_table(grades_json);
     }
