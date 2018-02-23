@@ -138,6 +138,18 @@ function sendrequest(func){
     console.log(req);   // Debugging code
 }
 
+function getLocalZip(func){
+    JSZipUtils.getBinaryContent('test.zip', function(err, data) {
+    if(err) {
+        throw err; // or handle err
+    }
+
+    JSZip.loadAsync(data).then(function () {
+        console.log('loaded');
+    });
+});
+}
+
 
 // Converts xlsm to json
 //  Uses SheetJS code to do this
@@ -438,7 +450,7 @@ function loadAllGrades(){
     // Determine whether or not it alread has grades_json
     if (typeof grades_json == 'undefined'){
         // If not, send request and have the request execute load_all_table
-        sendrequest(load_all_table);
+        getLocalZip(load_all_table);
     } else {
         load_all_table(grades_json);
     }
