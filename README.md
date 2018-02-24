@@ -4,7 +4,7 @@ While the information on this site should be up-to-date, we cannot guarantee it.
 For the most accurate information, please visit the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
 
 ### How It Works
-When the ICS33 Grade Viewer loads, it downloads the current *Grades* file from the ICS 33 website.
+When the ICS33 Grade Viewer loads, it downloads the current *Grades* file from the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
 The *Grades* file is a zipped .xslm file.
 The ICS 33 Grade Viewer unzips this file using the [JSZip](https://stuk.github.io/jszip/) library and then converts it to a JSON object using the [SheetJS](http://sheetjs.com/) library.
 
@@ -35,6 +35,8 @@ Within each row list, the information is as follows:
 
 If a grade has not yet be inputed, then there is a null.  
 After the hash ids, there are a lot of empty lists, which can be ignored.
+
+This data is then put into an HTML table and displayed to the user.
 
 ### Contributors
 [Chase Carnaroli](https://www.linkedin.com/in/ChaseCarnaroli)  
