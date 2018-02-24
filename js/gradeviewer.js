@@ -110,7 +110,12 @@ var grades_json;
 function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
-    var url = "http://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
+    if (window.location.protocol == 'https:'){
+        var url = "https://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
+    } else {
+        var url = "http://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
+    };
+    
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
