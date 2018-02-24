@@ -51,49 +51,6 @@ var table_length = 29;      // Length of the table
 
 
 /***************************
- Grades Functions
-
- The following functions are used to pull data from a grades json file
- ***************************/
-
-// Find HashId Index
-//  Finds the index of a hash id in the grades json
-//
-// Post: returns the index of the hash id, or -1 if its not in the json
-function findHashIndex(hashID, grades){
-    // Loop through the hash id column
-    for (i = 0; i < grades.length; i++){
-        hash = grades[i][hashID_column];
-        if (hash == hashID){
-            return i;
-        } else if (typeof hash == 'undefined'){
-            return -1;
-        }
-    }
-}
-
-
-// Get Score
-//  Gets a hash id's score for that specific column
-//
-//  Post: returns a string "{points} / {total points}"
-function getScore(hashIndex, column, grades){
-    return grades[hashIndex][column] + " / " + grades[total_points][column].toString();
-}
-
-
-// Convert Score to Percent
-//  Converts a string score into a percent by calling the eval method on the str
-//      Then multiplies it by 100 and turns it back into a string
-//
-//  Post: returns a string representing the percent of the score
-function scoreToPercent(score){
-    return (eval(score) * 100).toString() + '%';
-}
-
-
-
-/***************************
  Download and Convert XLSM file to JSON
 
  The following functions are used to download and convert the xlsm
@@ -153,14 +110,13 @@ function sendrequest(func){
 //
 //  Post: returns json of the request
 function xlsm_to_json(req){
-    var new_zip = new JSZip();
-    new_zip.load(req.response);
+    // Unzip the zip folder and pull out the grades file
+    grade_file = unzipRequest(req);
 
     // Set up and read data from file
-    var data = new Uint8Array(new_zip["files"][file_name]["_data"]["getContent"]());
+    var data = new Uint8Array(grade_file);
     var workbook = XLSX.read(data, {type:"array"});
 
-    /* DO SOMETHING WITH workbook HERE */
     // The first sheet is the one with the grades
     // This gets its name
     var grades_sheet_name = workbook.SheetNames[0];
@@ -171,6 +127,19 @@ function xlsm_to_json(req){
     // Convert sheet to JSON and return it
     grades_json = XLSX.utils.sheet_to_json(grades_sheet, {header:1});
     return grades_json;
+}
+
+
+// Unzips the 
+function unzipRequest(req){
+    // Create new JSZip object
+    var zip = new JSZip();
+
+    // Load the request's response into the JSZip object
+    zip.load(req.response);
+
+    // Return the content of the grades file
+    return zip["files"][file_name]["_data"]["getContent"]();
 }
 
 
@@ -212,6 +181,49 @@ function save_cookie(number){
     date = new Date();
     date.setTime(date.getTime() + 6048000000);
     document.cookie = "hashid=" + number + "; expires=" + date;
+}
+
+
+
+/***************************
+ Grades Functions
+
+ The following functions are used to pull data from a grades json file
+ ***************************/
+
+// Find HashId Index
+//  Finds the index of a hash id in the grades json
+//
+// Post: returns the index of the hash id, or -1 if its not in the json
+function findHashIndex(hashID, grades){
+    // Loop through the hash id column
+    for (i = 0; i < grades.length; i++){
+        hash = grades[i][hashID_column];
+        if (hash == hashID){
+            return i;
+        } else if (typeof hash == 'undefined'){
+            return -1;
+        }
+    }
+}
+
+
+// Get Score
+//  Gets a hash id's score for that specific column
+//
+//  Post: returns a string "{points} / {total points}"
+function getScore(hashIndex, column, grades){
+    return grades[hashIndex][column] + " / " + grades[total_points][column].toString();
+}
+
+
+// Convert Score to Percent
+//  Converts a string score into a percent by calling the eval method on the str
+//      Then multiplies it by 100 and turns it back into a string
+//
+//  Post: returns a string representing the percent of the score
+function scoreToPercent(score){
+    return (eval(score) * 100).toString() + '%';
 }
 
 
