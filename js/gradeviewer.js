@@ -6,6 +6,10 @@
  The range for start/end points are inclusive
  ***************************/
 
+// Grades Locations
+var grades_url = "www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";     // URL to grades file (without http/https)
+var file_name = "ics33win18grades.xlsm";                                    // Grades file name inside of zip folder
+
 // Column Variables
 var hashID_column = 0;      // HashID Column
 
@@ -111,11 +115,11 @@ function sendrequest(func){
     // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
     // Sets xlsm file source as the test file in our GitHub repo
     if (window.location.protocol == 'https:'){
-        var url = "https://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
+        var url = "https://" + grades_url;
     } else {
-        var url = "http://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";
+        var url = "http://" + grades_url;
     };
-    
+
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
@@ -153,7 +157,7 @@ function xlsm_to_json(req){
     new_zip.load(req.response);
 
     // Set up and read data from file
-    var data = new Uint8Array(new_zip["files"]["ics33win18grades.xlsm"]["_data"]["getContent"]());
+    var data = new Uint8Array(new_zip["files"][file_name]["_data"]["getContent"]());
     var workbook = XLSX.read(data, {type:"array"});
 
     /* DO SOMETHING WITH workbook HERE */
