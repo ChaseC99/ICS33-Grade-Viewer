@@ -130,7 +130,11 @@ function xlsm_to_json(req){
 }
 
 
-// Unzips the 
+// Unzips the request's response
+//  The request's response is a zip folder.
+//  This folder gets unzipped and the grades file from within is returned
+//
+//  Post: Returns the data of the grades file
 function unzipRequest(req){
     // Create new JSZip object
     var zip = new JSZip();
