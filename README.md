@@ -3,6 +3,13 @@ This website allows students in Pattis's ICS 33 class to view their grades onlin
 While the information on this site should be up-to-date, we cannot guarantee it.
 For the most accurate information, please visit the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
 
+### Reusability
+This website can easily be reused quarter to quarter.
+At the top of [gradeviewer.js](https://github.com/ChaseC99/ICS33-Grade-Viewer/blob/master/js/gradeviewer.js),
+there is a section called *Global Variables*.
+Under this section, simply change `grades_url` to be the link to the zip file
+and `file_name` to be the name of the grades file within the zip.  
+
 ### How It Works
 When the ICS33 Grade Viewer loads, it downloads the current *Grades* file from the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
 The *Grades* file is a zipped .xslm file.
@@ -32,6 +39,8 @@ Within each row list, the information is as follows:
 | 27    | Class Rank            |
 | 28    | Letter Grade          |
 | 29    | +/- (for Letter Grade)|
+
+These values can easily be changed in the *Global Variables* of `gradeviewer.js` to account for small differences from quarter to quarter.  
 
 If a grade has not yet be inputed, then there is a null.  
 After the hash ids, there are a lot of empty lists, which can be ignored.
