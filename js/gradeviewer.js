@@ -69,14 +69,14 @@ var grades_json;
 //
 //  Post: sets grades_json and calls the function passed through - func(grades_json)
 function sendrequest(func){
-    // THIS CODE LOGS THE JSON OBJECT TO THE CONSOLE
-    // Sets xlsm file source as the test file in our GitHub repo
+    // Sets the protocol to match the user's
+    //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
+    //  websites into https sites. This handles those edge cases.
     if (window.location.protocol == 'https:'){
         var url = "https://" + grades_url;
     } else {
         var url = "http://" + grades_url;
     };
-
 
     /* set up async GET request */
     var req = new XMLHttpRequest();
