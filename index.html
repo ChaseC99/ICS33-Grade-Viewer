@@ -17,22 +17,21 @@
         <header>
             <center><h1>ICS 33 Grade Viewer</h1></center>
         </header>
-        <body>
-            <div id='hash_input_form'>
-                <input id="hashID" type = "tel" name = "hashIDinput" placeholder="Hash Id" required>
-                <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
-                <a href="https://support.ics.uci.edu/studentID/" target="_blank"><p>Forgot your Hash ID?</p></a>
-            </div>
-            <div>
-                <table id="GradesTable" border="2"></table>
-            </div>
-            <footer>
-                <input type="button" value="Show all grades", onclick = "loadAllGrades()">
-                <p class="grades_link"><a href="https://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip" target="_blank">Download the full grade report</a></p>
-                <p>This website is still under development.<br>We are working to bring more features and a much better visual presentation of the data.<br>If you would like to help, check out our GitHub!</p>
-				<p><a href="https://github.com/ChaseC99/ICS33-Grade-Viewer" target="_blank"><img src="img/githubicon.png" alt="GitHub Logo" class="social-icon">Source Code</a></p>
-			</footer>
-        </body>
+        <div id='hash_input_form'>
+            <input id="hashID" type = "tel" name = "hashIDinput" placeholder="Hash Id" required>
+            <input id="enterButton" type = "button" value = "Enter" onclick = "loadHashGrades()">
+            <p><a href="https://support.ics.uci.edu/studentID/" target="_blank">Forgot your Hash ID?</a></p>
+        </div>
+        <div>
+            <table id="GradesTable" border="2"></table>
+        </div>
+        <footer>
+            <input type="button" value="Show all grades", onclick = "loadAllGrades()">
+            <p><a href="https://www.ics.uci.edu/~pattis/ICS-33/" target="_blank">Official ICS 33 Website</a></p>
+            <p><a href="https://www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip" target="_blank">Download the full grade report</a></p>
+            <p>Created by Chase Carnaroli<br>Major Contributors: Tristan Jogminas and Miles Hong<br>If you would like to help, check out our GitHub!</p>
+			<p><a href="https://github.com/ChaseC99/ICS33-Grade-Viewer" target="_blank"><img src="img/githubicon.png" alt="GitHub Logo" class="social-icon">Source Code</a></p>
+		</footer>
     </body>
     <script>
         // Link enter button in hashID input, with enterButton
