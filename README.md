@@ -28,11 +28,11 @@ Within each row list, the information is as follows:
 | 1-8   | Quiz Grades           |
 | 9-14  | Project Grades        |
 | 15-16 | In Lab Exam Grades    |
-| 17-19 | EM/EF Grades?         |
+| 17-19 | Midterm & Final Grade |
 | 20    | Sum of Quiz Grades    |
 | 21    | Sum of Project Grades |
-| 22    | Sum of EP?            |
-| 23    | Sum of Exams?         |
+| 22    | Sum of In-Lab Exams   |
+| 23    | Sum of Midterm & Final|
 | 24    | Extra Credit Points   |
 | 25    | Total Points          |
 | 26    | Percent Grade         |
