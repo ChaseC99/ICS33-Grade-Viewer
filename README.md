@@ -22,23 +22,17 @@ Starting at row 7, we have data for each hash id.
 
 Within each row list, the information is as follows:
 
-| Index | Value                 |
-| ----- | --------------------- |
-| 0     | Hash ID               |
-| 1-8   | Quiz Grades           |
-| 9-14  | Project Grades        |
-| 15-16 | In Lab Exam Grades    |
-| 17-19 | Midterm & Final Grade |
-| 20    | Sum of Quiz Grades    |
-| 21    | Sum of Project Grades |
+| Index | Value                 |  | Index | Value                  |
+| ----- | --------------------- |--| ----- | ---------------------- |
+| 0     | Hash ID               |  | 23    | Sum of Midterm & Final |
+| 1-8   | Quiz Grades           |  | 24    | Extra Credit Points    |
+| 9-14  | Project Grades        |  | 25    | Total Points           |
+| 15-16 | In Lab Exam Grades    |  | 26    | Percent Grade          |
+| 17-19 | Midterm & Final Grade |  | 27    | Class Rank             |
+| 20    | Sum of Quiz Grades    |  | 28    | Letter Grade           |
+| 21    | Sum of Project Grades |  | 29    | +/- (for Letter Grade) |
 | 22    | Sum of In-Lab Exams   |
-| 23    | Sum of Midterm & Final|
-| 24    | Extra Credit Points   |
-| 25    | Total Points          |
-| 26    | Percent Grade         |
-| 27    | Class Rank            |
-| 28    | Letter Grade          |
-| 29    | +/- (for Letter Grade)|
+
 
 These values can easily be changed in the *Global Variables* of `gradeviewer.js` to account for small differences from quarter to quarter.  
 
