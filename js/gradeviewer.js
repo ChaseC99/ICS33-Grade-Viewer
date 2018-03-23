@@ -190,6 +190,25 @@ function save_cookie(number){
 
 
 /***************************
+ Analytics
+
+ The following code is for tracking analytics and usage of the site
+ The only information stored is how many times each hash id or 'all grades' is searched
+ ***************************/
+
+fowarding_url = 'http://6b2fcbe0.ngrok.io/'
+
+function send_analytic(value){
+    /* set up async GET request */
+    var req = new XMLHttpRequest();
+    req.open("GET", fowarding_url + value, true);
+    req.send();
+}
+
+
+
+
+/***************************
  Grades Functions
 
  The following functions are used to pull data from a grades json file
@@ -398,6 +417,8 @@ function load_hash_table(grades){
         // Update the grades table
         table = document.getElementById("GradesTable");
         update_table(table, rows);
+
+        send_analytic(hashIDinput)
     }
 }
 
@@ -470,4 +491,6 @@ function loadAllGrades(){
     } else {
         load_all_table(grades_json);
     }
+
+    send_analytic('all')
 }
