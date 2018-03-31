@@ -7,7 +7,7 @@
  ***************************/
 
 // Grades Locations
-var grades_url = "www.ics.uci.edu/~pattis/ICS-33/ics33win18grades.zip";     // URL to grades file (without http/https)
+var grades_url = "www.ics.uci.edu/~ccarnaro/ICS33-Grade-Viewer/FinalGrades/ics33win18grades.zip";     // URL to grades file (without http/https)
 var file_name = "ics33win18grades.xlsm";                                    // Grades file name inside of zip folder
 
 // Column Variables
