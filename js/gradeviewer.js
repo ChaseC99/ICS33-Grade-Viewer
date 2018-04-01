@@ -418,7 +418,7 @@ function load_hash_table(grades){
         table = document.getElementById("GradesTable");
         update_table(table, rows);
 
-        send_analytic(hashIDinput)
+        //send_analytic(hashIDinput)
     }
 }
 
@@ -492,5 +492,5 @@ function loadAllGrades(){
         load_all_table(grades_json);
     }
 
-    send_analytic('all')
+    //send_analytic('all')
 }
