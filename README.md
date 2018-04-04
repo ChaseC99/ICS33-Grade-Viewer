@@ -1,7 +1,15 @@
-# [ICS33 Grade Viewer](http://www.ics.uci.edu/~ccarnaro/ics33gradeviewer.html)
-This website allows students in Pattis's ICS 33 class to view their grades online.  
-While the information on this site should be up-to-date, we cannot guarantee it.
-For the most accurate information, please visit the [ICS 33 website](https://www.ics.uci.edu/~pattis/ICS-33/).
+# [ICS 33 Grade Viewer](http://www.ics.uci.edu/~ccarnaro/ics33gradeviewer.html)
+This website allows students in Pattis's [ICS 33](https://www.ics.uci.edu/~pattis/ICS-33/) class to view their grades online.
+Simply enter your hashed id and your grades will be displayed.
+
+<html>
+    <center>
+        <figure>
+            <img src="https://i.imgur.com/5Jug5j3.png" alt="Screenshot of ICS 33 GradeViewer" height="250">
+            <figcaption> Screenshot of <i>ICS 33 Grade Viewer</i> </figcaption>
+        </figure>
+    </center>
+</html>  
 
 ### Reusability
 This website can easily be reused quarter to quarter.
@@ -15,7 +23,7 @@ When the ICS33 Grade Viewer loads, it downloads the current *Grades* file from t
 The *Grades* file is a zipped .xslm file.
 The ICS 33 Grade Viewer unzips this file using the [JSZip](https://stuk.github.io/jszip/) library and then converts it to a JSON object using the [SheetJS](http://sheetjs.com/) library.
 
-Inside of the JSON object, it contains the property "Winter 2018".
+Inside of the JSON object, it contains the property referring to the grades (e.g. "Winter 2018").
 This property has a two dimensional array, which can be represented as [row[column]].
 Rows 0-6 contain data representing statistics for the class.
 Starting at row 7, we have data for each hash id.
