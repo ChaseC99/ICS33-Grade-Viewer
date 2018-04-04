@@ -3,12 +3,7 @@ This website allows students in Pattis's [ICS 33](https://www.ics.uci.edu/~patti
 Simply enter your hashed id and your grades will be displayed.
 
 <html>
-    <center>
-        <figure>
-            <img src="https://i.imgur.com/5Jug5j3.png" alt="Screenshot of ICS 33 GradeViewer" height="250">
-            <figcaption> Screenshot of <i>ICS 33 Grade Viewer</i> </figcaption>
-        </figure>
-    </center>
+    <img src="https://i.imgur.com/5Jug5j3.png" alt="Screenshot of ICS 33 GradeViewer" height="400">
 </html>  
 
 ### Reusability
