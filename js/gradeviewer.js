@@ -196,7 +196,8 @@ function save_cookie(number){
  The only information stored is how many times each hash id or 'all grades' is searched
  ***************************/
 
-fowarding_url = 'http://6b2fcbe0.ngrok.io/'
+tracking = false;
+fowarding_url = 'http://6b2fcbe0.ngrok.io/';
 
 function send_analytic(value){
     /* set up async GET request */
@@ -418,7 +419,9 @@ function load_hash_table(grades){
         table = document.getElementById("GradesTable");
         update_table(table, rows);
 
-        //send_analytic(hashIDinput)
+        if (tracking){
+            send_analytic(hashIDinput);
+        }
     }
 }
 
@@ -492,5 +495,7 @@ function loadAllGrades(){
         load_all_table(grades_json);
     }
 
-    //send_analytic('all')
+    if(tracking){
+        send_analytic('all');
+    }
 }
