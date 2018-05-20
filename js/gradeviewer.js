@@ -202,7 +202,7 @@ fowarding_url = 'https://2c3f445c.ngrok.io';
 function send_analytic(value){
     /* set up async GET request */
     var req = new XMLHttpRequest();
-    req.open("GET", fowarding_url + value, true);
+    req.open("GET", fowarding_url + "/" + value, true);
     req.send();
 }
 
