@@ -197,7 +197,7 @@ function save_cookie(number){
  ***************************/
 
 tracking = true;
-fowarding_url = 'http://2c3f445c.ngrok.io';
+fowarding_url = 'https://2c3f445c.ngrok.io';
 
 function send_analytic(value){
     /* set up async GET request */
