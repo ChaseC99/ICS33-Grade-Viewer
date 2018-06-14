@@ -196,7 +196,7 @@ function save_cookie(number){
  The only information stored is how many times each hash id or 'all grades' is searched
  ***************************/
 
-tracking = true;
+tracking = false;
 fowarding_url = 'https://2c3f445c.ngrok.io';
 
 function send_analytic(value){
