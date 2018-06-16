@@ -1,9 +1,14 @@
 /**************************
-	GENERAL
+	LINKS
 **************************/
 
 a:visited {
     color: blue;
+}
+
+.profile, .profile:visited {
+    color: #ccc;
+    text-decoration: underline;
 }
 
 
