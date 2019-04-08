@@ -63,6 +63,19 @@ var table_length = 29;      // Length of the table
 var grades_json;
 
 
+// Error Alert for Failed Load Request
+//  Prints an error to the console and displays an alert, explaining that
+//      the load request failed
+function reqLoadErrorAlert(){
+    // Log error
+    console.log("Unable to load '" + file_name + "' from '" + grades_url + 
+        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
+        
+    // Display error
+    alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
+}
+
+
 // Sends xmlh request
 //  After the file loads, it saves the json to grades_json and calls the function
 //      which was passed through on grades_json
@@ -84,6 +97,12 @@ function sendrequest(func){
 
     // Tell request what to do with code once the request loads
     req.onload = function(e) {
+        // Check for 404 error
+        if (req.status == 404){
+            reqLoadErrorAlert();
+            return;
+        }
+
         // Convert response to json
         grades_json = xlsm_to_json(req);
 
@@ -100,12 +119,7 @@ function sendrequest(func){
 
     // Handle error if grades can't load
     req.onerror = function(e) {
-        // Log error
-        console.log("Unable to load '" + file_name + "' from '" + grades_url + 
-        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
-        
-        // Display error
-        alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
+        reqLoadErrorAlert(); 
     }
 
     // Send request
