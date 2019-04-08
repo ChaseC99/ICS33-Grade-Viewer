@@ -98,6 +98,16 @@ function sendrequest(func){
         func(grades_json)
     }
 
+    // Handle error if grades can't load
+    req.onerror = function(e) {
+        // Log error
+        console.log("Unable to load '" + file_name + "' from '" + grades_url + 
+        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
+        
+        // Display error
+        alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
+    }
+
     // Send request
     req.send();
     req.responseType = "arraybuffer";
@@ -494,7 +504,7 @@ function loadAllGrades(){
     } else {
         load_all_table(grades_json);
     }
-
+    
     if(tracking){
         send_analytic('all');
     }
