@@ -9,6 +9,7 @@
 // Grades Locations
 var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                         // Path to the to grades file (without http/https)
 var file_name = "ics33fal18grades.xlsm";                                    // Grades file name inside of zip folder
+var zip_link_location = "https://www.ics.uci.edu/~pattis/ICS-33/frameindex.html"    // Site where the zip link is located (NOT the url for the zip file)
 
 // Column Variables
 var hashID_column = 0;      // HashID Column
@@ -118,14 +119,14 @@ function unzipRequest(req){
 //      which was passed through on grades_json
 //
 //  Post: sets grades_json and calls the function passed through - func(grades_json)
-function downloadGradesRequest(file_name, func){
+function downloadGradesRequest(zip_name, func){
     // Sets the protocol to match the user's
     //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
     //  websites into https sites. This handles those edge cases.
     if (window.location.protocol == 'https:'){
-        var url = "https://" + grades_url + file_name;
+        var url = "https://" + grades_url + zip_name;
     } else {
-        var url = "http://" + grades_url + file_name;
+        var url = "http://" + grades_url + zip_name;
     };
 
     /* set up async GET request */
@@ -187,7 +188,7 @@ function reqLoadErrorAlert(){
 function findGradesURLRequest(func){
     /* set up async GET request */
     var req = new XMLHttpRequest();
-    req.open("GET", grades_url, true);
+    req.open("GET", zip_link_location, true);
 
     // Tell request what to do with code once the request loads
     req.onload = function(e) {
