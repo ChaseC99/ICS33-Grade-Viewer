@@ -7,7 +7,7 @@
  ***************************/
 
 // Grades Locations
-var grades_url = "www.ics.uci.edu/~pattis/ICS-33/ics33fal18grades.zip";     // URL to grades file (without http/https)
+var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                         // Path to the to grades file (without http/https)
 var file_name = "ics33fal18grades.xlsm";                                    // Grades file name inside of zip folder
 
 // Column Variables
@@ -51,9 +51,9 @@ var table_length = 29;      // Length of the table
 
 
 /***************************
- Download and Convert XLSM file to JSON
+ Convert XLSM file to JSON
 
- The following functions are used to download and convert the xlsm
+ The following functions are used to  convert the xlsm
  file into json format.
  ***************************/
 
@@ -61,72 +61,6 @@ var table_length = 29;      // Length of the table
 //  After sendrequest is run the first time, the json is stored here so that it
 //      it does not need to be run again (increases efficency)
 var grades_json;
-
-
-// Error Alert for Failed Load Request
-//  Prints an error to the console and displays an alert, explaining that
-//      the load request failed
-function reqLoadErrorAlert(){
-    // Log error
-    console.log("Unable to load '" + file_name + "' from '" + grades_url + 
-        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
-        
-    // Display error
-    alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
-}
-
-
-// Sends xmlh request
-//  After the file loads, it saves the json to grades_json and calls the function
-//      which was passed through on grades_json
-//
-//  Post: sets grades_json and calls the function passed through - func(grades_json)
-function sendrequest(func){
-    // Sets the protocol to match the user's
-    //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
-    //  websites into https sites. This handles those edge cases.
-    if (window.location.protocol == 'https:'){
-        var url = "https://" + grades_url;
-    } else {
-        var url = "http://" + grades_url;
-    };
-
-    /* set up async GET request */
-    var req = new XMLHttpRequest();
-    req.open("GET", url, true);
-
-    // Tell request what to do with code once the request loads
-    req.onload = function(e) {
-        // Check for 404 error
-        if (req.status == 404){
-            reqLoadErrorAlert();
-            return;
-        }
-
-        // Convert response to json
-        grades_json = xlsm_to_json(req);
-
-        // Change row names for class statistics
-        grades_json[total_points][0] = 'Total Points';
-        grades_json[normalization][0] = 'Normalization'
-        grades_json[students][0] = 'Students'
-
-        console.log(grades_json);   // Debugging code
-
-        // Execute funciton with grades_json
-        func(grades_json)
-    }
-
-    // Handle error if grades can't load
-    req.onerror = function(e) {
-        reqLoadErrorAlert(); 
-    }
-
-    // Send request
-    req.send();
-    req.responseType = "arraybuffer";
-    console.log(req);   // Debugging code
-}
 
 
 // Converts xlsm to json
@@ -170,6 +104,124 @@ function unzipRequest(req){
     return zip["files"][file_name]["_data"]["getContent"]();
 }
 
+
+
+
+/***************************
+ Download Grades Request
+
+ This code downloads the grades file from Pattis's site 
+ ***************************/
+
+// Sends xmlh request
+//  After the file loads, it saves the json to grades_json and calls the function
+//      which was passed through on grades_json
+//
+//  Post: sets grades_json and calls the function passed through - func(grades_json)
+function downloadGradesRequest(file_name, func){
+    // Sets the protocol to match the user's
+    //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
+    //  websites into https sites. This handles those edge cases.
+    if (window.location.protocol == 'https:'){
+        var url = "https://" + grades_url + file_name;
+    } else {
+        var url = "http://" + grades_url + file_name;
+    };
+
+    /* set up async GET request */
+    var req = new XMLHttpRequest();
+    req.open("GET", url, true);
+
+    // Tell request what to do with code once the request loads
+    req.onload = function(e) {
+        // Check for 404 error
+        if (req.status == 404){
+            reqLoadErrorAlert();
+            return;
+        }
+
+        // Convert response to json
+        grades_json = xlsm_to_json(req);
+
+        // Change row names for class statistics
+        grades_json[total_points][0] = 'Total Points';
+        grades_json[normalization][0] = 'Normalization'
+        grades_json[students][0] = 'Students'
+
+        console.log(grades_json);   // Debugging code
+
+        // Execute funciton with grades_json
+        func(grades_json)
+    }
+
+    // Handle error if grades can't load
+    req.onerror = function(e) {
+        reqLoadErrorAlert(); 
+    }
+
+    // Send request
+    req.send();
+    req.responseType = "arraybuffer";
+    console.log(req);   // Debugging code
+}
+
+
+// Error Alert for Failed Load Request
+//  Prints an error to the console and displays an alert, explaining that
+//      the load request failed
+function reqLoadErrorAlert(){
+    // Log error
+    console.log("Unable to load '" + file_name + "' from '" + grades_url + 
+        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
+        
+    // Display error
+    alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
+}
+
+
+// Find Grades URL
+//  Finds the name of the grades zip file on Pattis' ICS 33 Website
+//  After finding the file, it calls the sendrequest function
+//
+//  Post: calls downloadGradesRequest, passing through the file name and callback func
+function findGradesURLRequest(func){
+    /* set up async GET request */
+    var req = new XMLHttpRequest();
+    req.open("GET", grades_url, true);
+
+    // Tell request what to do with code once the request loads
+    req.onload = function(e) {
+        // Check for 404 error
+        if (req.status == 404){
+            reqLoadErrorAlert();
+            return;
+        }
+        
+        // RegEx to find the zip file on the page
+        var pattern = new RegExp(/"(.*\.zip)"/);
+        regex_result = pattern.exec(req.response);
+        zip_name = regex_result[1];
+        console.log("Zip file name: " + zip_name);
+
+        // calls downloadGradesRequest to download the grades
+        downloadGradesRequest(zip_name, func);
+    }
+
+    // Send request
+    req.send();
+    req.responseType = "text";
+}
+
+
+// Download grades
+//  This funciton triggers the process to download grades from  the ICS 33 Website
+//  Although it only has the findGradesURLRequest function in it, having it in this
+//  wrapper function will allow me to easily make future changes to the download_grades procces
+//
+//  Post: grades_json now contains the grades, the callback function passed through is executed
+function download_grades(func){
+    findGradesURLRequest(func);
+}
 
 
 /***************************
@@ -497,7 +549,7 @@ function loadHashGrades(){
     // Determine whether or not it alread has grades_json
     if (typeof grades_json == 'undefined'){
         // If not, send request and have the request execute load_hash_table
-        sendrequest(load_hash_table);
+        download_grades(load_hash_table);
     } else {
         load_hash_table(grades_json);
     }
@@ -514,7 +566,7 @@ function loadAllGrades(){
     // Determine whether or not it alread has grades_json
     if (typeof grades_json == 'undefined'){
         // If not, send request and have the request execute load_all_table
-        sendrequest(load_all_table);
+        download_grades(load_all_table);
     } else {
         load_all_table(grades_json);
     }
