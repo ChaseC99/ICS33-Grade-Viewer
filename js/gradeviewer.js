@@ -8,7 +8,6 @@
 
 // Grades Locations
 var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                         // Path to the to grades file (without http/https)
-var file_name = "ics33fal18grades.xlsm";                                    // Grades file name inside of zip folder
 var zip_link_location = "https://www.ics.uci.edu/~pattis/ICS-33/frameindex.html"    // Site where the zip link is located (NOT the url for the zip file)
 
 // Column Variables
@@ -100,6 +99,10 @@ function unzipRequest(req){
 
     // Load the request's response into the JSZip object
     zip.load(req.response);
+
+    // Get the file name from inside the zip
+    file_name = Object.keys(zip["files"])[0];
+    console.log("Grades file name: " + file_name);
 
     // Return the content of the grades file
     return zip["files"][file_name]["_data"]["getContent"]();
