@@ -39,6 +39,11 @@
 		</footer>
     </body>
     <script>
+        // Download grades
+        // This is done when the page loads,in order to have the results ready when the user hits enter
+        // Vastly improves speed of website
+        download_grades(console.log)
+
         // Link enter button in hashID input, with enterButton
         $("#hashID").keyup(function(event) {
             // Check to see if enter button (code 13) was pressed
