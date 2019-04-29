@@ -7,7 +7,7 @@
  ***************************/
 
 // Grades Locations
-var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                         // Path to the to grades file (without http/https)
+var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                                 // Path to the to grades file (without http/https)
 var zip_link_location = "https://www.ics.uci.edu/~pattis/ICS-33/frameindex.html"    // Site where the zip link is located (NOT the url for the zip file)
 
 // Column Variables
@@ -151,8 +151,6 @@ function downloadGradesRequest(zip_name, func){
         grades_json[total_points][0] = 'Total Points';
         grades_json[normalization][0] = 'Normalization'
         grades_json[students][0] = 'Students'
-
-        console.log(grades_json);   // Debugging code
 
         // Execute funciton with grades_json
         func(grades_json)
