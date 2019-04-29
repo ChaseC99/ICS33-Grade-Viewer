@@ -132,6 +132,9 @@ function downloadGradesRequest(zip_name, func){
         var url = "http://" + grades_url + zip_name;
     };
 
+    // Set link to download grades zip
+    $('#gradesZip').attr('href', url)
+
     /* set up async GET request */
     var req = new XMLHttpRequest();
     req.open("GET", url, true);
