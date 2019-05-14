@@ -375,9 +375,8 @@ function generate_row(grades, rowNum){
 //  Creates a row header based on what number the header var is
 //
 //  Post: returns a row element
-function generate_header(grades){
+function generate_header(grades, sortable=false){
     var row = document.createElement('tr');
-
     for (var item = 0; item <= table_length; item++) {
         itemValue = grades[header][item];
 
@@ -385,6 +384,9 @@ function generate_header(grades){
         //  and a text node, make the text node the contents of the <th>,
         //  and put the <th> at the end of the table row
         var cell = document.createElement("th");
+        if (sortable) {
+            cell.onclick = generateSortOnClick(item)
+        }
 
         if (item == plus_minus){
             var cellText = document.createTextNode("+/-")
@@ -398,7 +400,6 @@ function generate_header(grades){
         cell.appendChild(cellText);
         row.appendChild(cell);
     }
-
     return row;
 }
 
@@ -462,6 +463,35 @@ function generate_grade_rows(grades){
 }
 
 
+// Generates the sorted table to display all the grades
+//  Shows each row like how it is displayed in the xlsm file
+//
+//  Post: returns a sorted list of rows for the table
+function generate_sorted_rows(grades, sortColumn=0, descending=false) {
+    var grades_to_sort = [];
+    var rowNum = start_grades;
+    while(typeof grades[rowNum][0] != "undefined"){
+        grades_to_sort.push(grades[rowNum]);
+        rowNum++;
+    }
+
+
+    if (!descending) {
+        grades_to_sort.sort(function(row1, row2){return row1[sortColumn] - row2[sortColumn]})
+    }
+    else {
+        grades_to_sort.sort(function(row1, row2){return row2[sortColumn] - row1[sortColumn]})
+    }
+    grades = grades.slice(0,start_grades).concat(grades_to_sort)
+    var rows = []
+    for (rowNum=start_grades; rowNum<grades.length; rowNum++) {
+        rows.push(generate_row(grades, rowNum))
+    }
+
+    return rows;
+}
+
+
 // Load the table for hash id
 //  This function calls all of the other functions to display the hash id grades
 //  It finds the hash id index, determines whether it is valid, gets the table,
@@ -512,12 +542,12 @@ function load_hash_table(grades){
 //  It gets the table, generates the rows, and updates the table
 //
 // Post: table is updated to display all grades
-function load_all_table(grades){
+function load_all_table(grades, sortColumn = 0, descending = false){
     // Create rows variable
     var rows = [];
 
     // Add header to rows
-    rows.push(generate_header(grades));
+    rows.push(generate_header(grades, sortable=true));
 
     // Create class statistics table
     rows = rows.concat(generate_class_rows(grades));
@@ -526,7 +556,8 @@ function load_all_table(grades){
     rows.push(document.createElement('br'));
 
     // Create grades table
-    rows = rows.concat(generate_grade_rows(grades));
+    // rows = rows.concat(generate_grade_rows(grades));
+    rows = rows.concat(generate_sorted_rows(grades, sortColumn, descending));
 
     // Update the grades table
     table = document.getElementById("GradesTable");
@@ -579,4 +610,31 @@ function loadAllGrades(){
     if(tracking){
         send_analytic('all');
     }
+}
+
+
+// TableHeader is being generated
+//  This function generates a function that would be called on a table header click
+//  The generated function is triggered when one of the table headers is pressed
+//  The generated function figures out the new sort parameters are,
+//      and calls the sort method accordingly
+//
+//  Post: returns the function that calls load_all_table with the new sort parameters
+var currentSortIndex = 0
+var descending = false
+function generateSortOnClick(colIndex) {
+    function sortAllGrades() {
+        if (currentSortIndex == colIndex) {
+            descending = !descending        // flips the descending value (reverses the sort)
+        } else {
+            currentSortIndex = colIndex     // udated current sort index to keep track
+            if (colIndex == 0 || colIndex == 27) {    //if sort by hash id column or rank, default behavior is ascending
+                descending = false
+            } else {                      //if sort by any other column, default behavior is descending
+                descending = true
+            }
+        }
+        load_all_table(grades_json, currentSortIndex, descending);
+    }
+    return sortAllGrades
 }
