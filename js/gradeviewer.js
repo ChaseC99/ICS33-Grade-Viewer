@@ -556,7 +556,6 @@ function load_all_table(grades, sortColumn = 0, descending = false){
     rows.push(document.createElement('br'));
 
     // Create grades table
-    // rows = rows.concat(generate_grade_rows(grades));
     rows = rows.concat(generate_sorted_rows(grades, sortColumn, descending));
 
     // Update the grades table
