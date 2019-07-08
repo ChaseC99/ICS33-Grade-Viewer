@@ -8,7 +8,13 @@
 
 // Grades Locations
 var grades_url = "www.ics.uci.edu/~pattis/ICS-33/";                                 // Path to the to grades file (without http/https)
-var zip_link_location = "https://www.ics.uci.edu/~pattis/ICS-33/frameindex.html"    // Site where the zip link is located (NOT the url for the zip file)
+var zip_link_location = "https://www.ics.uci.edu/~pattis/ICS-33/frameindex.html";   // Site where the zip link is located (NOT the url for the zip file)
+
+// Testing Locally
+//  To test locally, the site must be running on localhost
+//  (See README.md for more information)
+var use_local_test_file = true;             // Set to `true` for testing code during development
+var local_test_file = "test_grades.zip";    // Location of the grades file used for testing
 
 // Column Variables
 var hashID_column = 0;      // HashID Column
@@ -114,7 +120,7 @@ function unzipRequest(req){
 /***************************
  Download Grades Request
 
- This code downloads the grades file from Pattis's site 
+ This code downloads the grades file from Pattis's site
  ***************************/
 
 // Sends xmlh request
@@ -122,19 +128,7 @@ function unzipRequest(req){
 //      which was passed through on grades_json
 //
 //  Post: sets grades_json and calls the function passed through - func(grades_json)
-function downloadGradesRequest(zip_name, func){
-    // Sets the protocol to match the user's
-    //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
-    //  websites into https sites. This handles those edge cases.
-    if (window.location.protocol == 'https:'){
-        var url = "https://" + grades_url + zip_name;
-    } else {
-        var url = "http://" + grades_url + zip_name;
-    };
-
-    // Set link to download grades zip
-    $('#gradesZip').attr('href', url)
-
+function downloadGradesRequest(url, func){
     /* set up async GET request */
     var req = new XMLHttpRequest();
     req.open("GET", url, true);
@@ -161,7 +155,7 @@ function downloadGradesRequest(zip_name, func){
 
     // Handle error if grades can't load
     req.onerror = function(e) {
-        reqLoadErrorAlert(); 
+        reqLoadErrorAlert();
     }
 
     // Send request
@@ -176,9 +170,9 @@ function downloadGradesRequest(zip_name, func){
 //      the load request failed
 function reqLoadErrorAlert(){
     // Log error
-    console.log("Unable to load '" + file_name + "' from '" + grades_url + 
+    console.log("Unable to load '" + file_name + "' from '" + grades_url +
         "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
-        
+
     // Display error
     alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
 }
@@ -201,15 +195,27 @@ function findGradesURLRequest(func){
             reqLoadErrorAlert();
             return;
         }
-        
+
         // RegEx to find the zip file on the page
         var pattern = new RegExp(/"(.*\.zip)"/);
         regex_result = pattern.exec(req.response);
         zip_name = regex_result[1];
         console.log("Zip file name: " + zip_name);
 
+        // Sets the protocol to match the user's
+        //  Some users (like Tristen *cough cough*) have weird plug-ins that turn http
+        //  websites into https sites. This handles those edge cases.
+        if (window.location.protocol == 'https:'){
+            var url = "https://" + grades_url + zip_name;
+        } else {
+            var url = "http://" + grades_url + zip_name;
+        };
+
+        // Set link to download grades zip
+        $('#gradesZip').attr('href', url);
+
         // calls downloadGradesRequest to download the grades
-        downloadGradesRequest(zip_name, func);
+        downloadGradesRequest(url, func);
     }
 
     // Send request
@@ -220,12 +226,16 @@ function findGradesURLRequest(func){
 
 // Download grades
 //  This funciton triggers the process to download grades from  the ICS 33 Website
-//  Although it only has the findGradesURLRequest function in it, having it in this
-//  wrapper function will allow me to easily make future changes to the download_grades procces
+//  Having this in a wrapper function makes it easy to add future changes to the
+//  download_grades procces, such as toggling the file source for local testing
 //
 //  Post: grades_json now contains the grades, the callback function passed through is executed
 function download_grades(func){
-    findGradesURLRequest(func);
+    if(use_local_test_file){
+        downloadGradesRequest(local_test_file, func);
+    } else {
+        findGradesURLRequest(func);
+    }
 }
 
 
@@ -275,6 +285,8 @@ function save_cookie(number){
 
  The following code is for tracking analytics and usage of the site
  The only information stored is how many times each hash id or 'all grades' is searched
+
+ DEPRECIATED - analytics are now tracked by Google Analytics in index.html
  ***************************/
 
 tracking = false;
@@ -575,7 +587,7 @@ function loadAllGrades(){
     } else {
         load_all_table(grades_json);
     }
-    
+
     if(tracking){
         send_analytic('all');
     }
