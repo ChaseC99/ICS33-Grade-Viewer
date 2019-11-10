@@ -44,10 +44,13 @@ If the user inputs a Hash Id, that Id is saved as a cookie so that the *ICS 33 G
 2. **Navigate into the "*ICS-33-Grade-Viewer*" Folder**  
 `cd ICS-33-Grade-Viewer`
 
-3. **Run the website on your local host**  
+3. **Turn on local testing**  
+Set `use_local_test_file` to `true` in [*js/gradviewer.js*](https://github.com/ChaseC99/ICS33-Grade-Viewer/blob/master/js/gradeviewer.js#L16)
+
+4. **Run the website on your local host**  
 `python3 -m http.server`
 
-4. **Navigate to "*[localhost:8000](localhost:8000)*" in your browser**
+5. **Navigate to "*[localhost:8000](localhost:8000)*" in your browser**
 
 **The website will only work if you run it on local host.**  
 Because of the [CORS same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy), you won't be able to load the grades from the ICS 33 website.
