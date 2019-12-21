@@ -137,7 +137,7 @@ function downloadGradesRequest(url, func){
     req.onload = function(e) {
         // Check for 404 error
         if (req.status == 404){
-            reqLoadErrorAlert();
+            reqLoadErrorAlert(func);
             return;
         }
 
@@ -155,7 +155,7 @@ function downloadGradesRequest(url, func){
 
     // Handle error if grades can't load
     req.onerror = function(e) {
-        reqLoadErrorAlert();
+        reqLoadErrorAlert(func);
     }
 
     // Send request
@@ -165,16 +165,27 @@ function downloadGradesRequest(url, func){
 }
 
 
-// Error Alert for Failed Load Request
-//  Prints an error to the console and displays an alert, explaining that
-//      the load request failed
-function reqLoadErrorAlert(){
-    // Log error
-    console.log("Unable to load '" + file_name + "' from '" + grades_url +
-        "'\nMake sure that 'file_name' and 'grades_url' are up to date and that the grade viewer is running on the same domain as 'grades_url'");
-
+// Error alert for failed load request
+//  If unable to find/load grades from the ICS 33 website,
+//  the user will be prompted to instead display grades from the local_test_file
+function reqLoadErrorAlert(func){
     // Display error
-    alert("Unable to load '" + file_name + "' from '" + grades_url + "'");
+    if (!use_local_test_file && window.confirm("Unable to find grades on the ICS 33 website." +
+                " They might not be available right now.\n\n" +
+                "Would you like to view the site using old grades from Winter 2018?")) {
+        use_local_test_file = true;
+        download_grades(func);
+        displayOldGradesWarningBanner()
+    }
+}
+
+
+// Old Grades Warning Banner
+//  When not using the most current grades, 
+//  the Grade Viewer should display this banner to let users know.
+function displayOldGradesWarningBanner(){
+    $('header').prepend('<div style="text-align:center;padding:20px;background-color:#ff9800;color:white">'+
+                        '<b>Warning:</b> This site is not showing the most current grades from ICS 33.</div>'); 
 }
 
 
@@ -192,7 +203,7 @@ function findGradesURLRequest(func){
     req.onload = function(e) {
         // Check for 404 error
         if (req.status == 404){
-            reqLoadErrorAlert();
+            reqLoadErrorAlert(func);
             return;
         }
 
