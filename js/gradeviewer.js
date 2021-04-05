@@ -43,7 +43,7 @@ var total_points = 25;      // Total points
 var percent_grade = 26;     // Percent grades
 var class_rank = 27;        // Class rank
 var letter_grade = 28;      // Letter grade
-var plus_minus = 29;        // +/- for letter grade
+var plus_minus = 30;        // +/- for letter grade
 
 
 // Row Variables
@@ -52,7 +52,7 @@ var total_points = 1;       // Row: Points for Instrument
 var students = 2;           // Row: Students Taking
 var normalization = 7;      // Row: Normalization
 var start_grades = 8;       // Row number for start of grades
-var table_length = 29;      // Length of the table
+var table_length = 30;      // Length of the table
 
 
 
