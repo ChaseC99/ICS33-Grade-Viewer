@@ -3,15 +3,25 @@
     <head>
         <meta charset="utf-8">
 		<title>ICS 33 Grades</title>
-        <link rel="icon" href="img/33icon.png">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/gradeviewer.css">
-        <link rel="stylesheet" href="css/responsive.css">
-        <link rel="manifest" href="/manifest.json">
-        <script lang="javascript" src="js/JSZip/dist/jszip.js"></script>
-        <script lang="javascript" src="js/gradeviewer.js"></script>
+        <link rel="icon" href="ICS33-Grade-Viewer/img/33icon.png">
+        <link rel="stylesheet" href="ICS33-Grade-Viewer/css/normalize.css">
+        <link rel="stylesheet" href="ICS33-Grade-Viewer/css/gradeviewer.css">
+        <link rel="stylesheet" href="ICS33-Grade-Viewer/css/responsive.css">
+        <link rel="manifest" href="ICS33-Grade-Viewer/manifest.json">
+	    <script lang="javascript" src="ICS33-Grade-Viewer/js/JSZip/dist/jszip.js"></script>
+        <script lang="javascript" src="ICS33-Grade-Viewer/js/gradeviewer.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script lang="javascript" src="js/sheetjs/dist/xlsx.full.min.js"></script>
+        <script lang="javascript" src="ICS33-Grade-Viewer/js/sheetjs/dist/xlsx.full.min.js"></script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134668049-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-134668049-2');
+        </script>
     </head>
     <body>
         <header>
@@ -27,8 +37,8 @@
         </div>
         <footer>
             <input type="button" value="Show all grades", onclick = "loadAllGrades()">
-            <p>
-                <a href="https://www.ics.uci.edu/~pattis/ICS-33/" target="_blank">Official ICS 33 Website</a>
+	        <p>
+                <a href="https://www.ics.uci.edu/~pattis/ICS-33/" target="_blank">ICS 33 Website</a>
                 |
                 <a id="gradesZip" href="" target="_blank">Download Grades</a>
             </p>
@@ -42,17 +52,17 @@
                 <a class="profile" href="https://www.linkedin.com/in/miles-hong-a74ba3155/" target="_blank">Miles Hong</a>,
                 <a class="profile" href="https://www.linkedin.com/in/willsunnn/" target="_blank">William Sun</a>
                 <br>
-                <br>
-                If you would like to help, check out our GitHub!
-            </p>
-			<p><a href="https://github.com/ChaseC99/ICS33-Grade-Viewer" target="_blank"><img src="img/githubicon.png" alt="GitHub Logo" class="social-icon">Source Code</a></p>
-		</footer>
+           	    <br>
+           	    If you would like to help, check out our GitHub!
+       	    </p>
+	        <p><a href="https://github.com/ChaseC99/ICS33-Grade-Viewer" target="_blank"><img src="ICS33-Grade-Viewer/img/githubicon.png" alt="GitHub Logo" class="social-icon">Source Code</a></p>
+	    </footer>
     </body>
     <script>
-        // Download grades
-        // This is done when the page loads,in order to have the results ready when the user hits enter
-        // Vastly improves speed of website
-        download_grades(console.log)
+        // Download grades from ICS 33 website when the page loads
+        // Improves speed because it downloads the grades before
+        //      the user types in their number
+        download_grades(console.log);
 
         // Link enter button in hashID input, with enterButton
         $("#hashID").keyup(function(event) {
@@ -62,20 +72,20 @@
                 $("#enterButton").click();  // Clicks enter button
             }
         });
-
-        // Checks for hash id cookie
+	
+	    // Checks for hash id cookie
         // If there is one, replace hashID value with hash id from cookie
         if (getHashCookie() != "") {
             $('#hashID').attr("value", getHashCookie());
         };
 
-        // Focus on the input field
+	    // Focus on the input field
         $('#hashID').focus();
 
-        // Selects text in input field
-        $('#hashID').select();
+	    // Selects text in input field
+	    $('#hashID').select();
 
-        // Set link to download grades zip
+	    // Set link to download grades zip
         $('#gradesZip').attr('href', 'https://' + grades_url)
     </script>
 </html>

@@ -1,0 +1,9 @@
+chmod 755 js
+chmod 644 js/gradeviewer.js
+chmod 755 js/JSZip  
+chmod 755 js/JSZip/dist
+chmod 644 js/JSZip/dist/*
+chmod 755 js/sheetjs
+chmod 755 js/sheetjs/dist
+chmod 644 js/sheetjs/dist/*
+
